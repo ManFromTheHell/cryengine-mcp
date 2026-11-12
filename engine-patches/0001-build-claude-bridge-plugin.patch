@@ -1,0 +1,25 @@
+diff --git a/Tools/CMake/BuildSandbox.cmake b/Tools/CMake/BuildSandbox.cmake
+index 328e0647..ca5a4493 100644
+--- a/Tools/CMake/BuildSandbox.cmake
++++ b/Tools/CMake/BuildSandbox.cmake
+@@ -1,4 +1,5 @@
+ option(PLUGIN_SAMPLE_EDITOR_PLUGIN "Build SamplePlugin" OFF)
++option(PLUGIN_CLAUDE_BRIDGE "Build ClaudeBridgePlugin (Claude MCP editor bridge)" OFF)
+ 
+ set(CMAKE_AUTOMOC_RELAXED_MODE TRUE)
+ 
+@@ -61,6 +62,9 @@ add_subdirectory("Code/Sandbox/Libs/SandboxPython")
+ if (PLUGIN_SAMPLE_EDITOR_PLUGIN)
+ 	add_subdirectory("Code/Sandbox/Plugins/SamplePlugin")
+ endif()
++if (PLUGIN_CLAUDE_BRIDGE)
++	add_subdirectory("Code/Sandbox/Plugins/ClaudeBridgePlugin")
++endif()
+ add_subdirectory("Code/Sandbox/Plugins/VehicleEditor")
+ add_subdirectory("Code/Sandbox/Plugins/SmartObjectEditor")
+ add_subdirectory("Code/Sandbox/Plugins/DialogEditor")
+@@ -83,4 +87,3 @@ if(OPTION_UNIT_TEST AND PLUGIN_SAMPLE_EDITOR_PLUGIN)
+ endif()
+ #libs
+ add_subdirectory ("Code/Libs/prt")
+-

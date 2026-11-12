@@ -1,0 +1,70 @@
+{
+ "format": 1,
+ "generated": "package_clean.py write-allowlist",
+ "release": {
+  "bin": {
+   "required": [],
+   "keep_unsure": {
+    "CRYENGINE.CSharp.dll": "loaded by name at run time or not proven unneeded; kept"
+   }
+  },
+  "bin/win_x64": {
+   "required": [
+    "Game.dll"
+   ],
+   "keep_unsure": {}
+  },
+  "bin/win_x64_release": {
+   "required": [
+    "CryAudioImplSDLMixer.dll",
+    "CryDefaultEntities.dll",
+    "CryPerceptionSystem.dll",
+    "CryRenderD3D11.dll",
+    "CryScaleformD3D11.dll",
+    "CryScaleformSchematyc.dll",
+    "CrySensorSystem.dll",
+    "CrySystem.dll",
+    "CryUQS_Core.dll",
+    "GameLauncher.exe",
+    "SDL2.dll",
+    "amd_ags_x64.dll",
+    "d3dcompiler_47.dll",
+    "dbghelp.dll",
+    "mpg123.dll"
+   ],
+   "keep_unsure": {
+    "Cry3DEngine.dll": "loaded by name at run time or not proven unneeded; kept",
+    "CryAISystem.dll": "loaded by name at run time or not proven unneeded; kept",
+    "CryAction.dll": "loaded by name at run time or not proven unneeded; kept",
+    "CryAnimation.dll": "loaded by name at run time or not proven unneeded; kept",
+    "CryAudioSystem.dll": "loaded by name at run time or not proven unneeded; kept",
+    "CryDynamicResponseSystem.dll": "loaded by name at run time or not proven unneeded; kept",
+    "CryEntitySystem.dll": "loaded by name at run time or not proven unneeded; kept",
+    "CryFlowGraph.dll": "loaded by name at run time or not proven unneeded; kept",
+    "CryFont.dll": "loaded by name at run time or not proven unneeded; kept",
+    "CryGamePlatform.dll": "loaded by name at run time or not proven unneeded; kept",
+    "CryGamePlatformNodes.dll": "loaded by name at run time or not proven unneeded; kept",
+    "CryHTTP.dll": "loaded by name at run time or not proven unneeded; kept",
+    "CryInput.dll": "loaded by name at run time or not proven unneeded; kept",
+    "CryLiveCreate.dll": "loaded by name at run time or not proven unneeded; kept",
+    "CryLobby.dll": "loaded by CryAction; imports steam_api64.dll, which therefore stays",
+    "CryMovie.dll": "loaded by name at run time or not proven unneeded; kept",
+    "CryNetwork.dll": "loaded by name at run time or not proven unneeded; kept",
+    "CryPhysics.dll": "loaded by name at run time or not proven unneeded; kept",
+    "CryRenderD3D12.dll": "alternative renderer (r_driver); the shader caches shipped are D3D11 only; kept until a run proves it unneeded",
+    "CryRenderVulkan.dll": "alternative renderer (r_driver); the shader caches shipped are D3D11 only; kept until a run proves it unneeded",
+    "CryScaleform.dll": "loaded by name at run time or not proven unneeded; kept",
+    "CryScaleformD3D12.dll": "alternative renderer (r_driver); the shader caches shipped are D3D11 only; kept until a run proves it unneeded",
+    "CryScaleformHelper.dll": "loaded by name at run time or not proven unneeded; kept",
+    "CryScaleformVulkan.dll": "alternative renderer (r_driver); the shader caches shipped are D3D11 only; kept until a run proves it unneeded",
+    "CrySchematyc.dll": "loaded by name at run time or not proven unneeded; kept",
+    "CryScriptSystem.dll": "loaded by name at run time or not proven unneeded; kept",
+    "CryUDR.dll": "loaded by name at run time or not proven unneeded; kept",
+    "WinPixEventRuntime.dll": "loaded by name at run time or not proven unneeded; kept",
+    "dbgcore.dll": "loaded by name at run time or not proven unneeded; kept",
+    "qpOASES.dll": "imported statically by cryphysics.dll",
+    "steam_api64.dll": "imported statically by CryLobby.dll"
+   }
+  }
+ }
+}

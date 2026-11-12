@@ -1,0 +1,1542 @@
+{
+ "add_component": {
+  "closes": "no",
+  "editor": "yes",
+  "editor_note": "",
+  "effects": "modifies the level, no undo",
+  "family": "Level and objects",
+  "helpers": "_send_structured, component_properties (server.py:1100)",
+  "launches": "no",
+  "writes": "no"
+ },
+ "anim_check": {
+  "closes": "no",
+  "editor": "yes",
+  "editor_note": "",
+  "effects": "none",
+  "family": "Animation and character",
+  "helpers": "anim_check",
+  "launches": "no",
+  "writes": "no"
+ },
+ "anim_sample": {
+  "closes": "no",
+  "editor": "yes",
+  "editor_note": "",
+  "effects": "none",
+  "family": "Animation and character",
+  "helpers": "anim_sample",
+  "launches": "no",
+  "writes": "no"
+ },
+ "asset_info": {
+  "closes": "no",
+  "editor": "no",
+  "editor_note": "",
+  "effects": "reads only",
+  "family": "Assets",
+  "helpers": "asset_catalog",
+  "launches": "no",
+  "writes": "no"
+ },
+ "asset_metadata": {
+  "closes": "no",
+  "editor": "no",
+  "editor_note": "",
+  "effects": "writes files (new files only; dry run by default)",
+  "family": "Assets",
+  "helpers": "asset_meta",
+  "launches": "no",
+  "writes": "conditional"
+ },
+ "asset_report": {
+  "closes": "no",
+  "editor": "no",
+  "editor_note": "",
+  "effects": "reads only",
+  "family": "Assets",
+  "helpers": "asset_catalog",
+  "launches": "no",
+  "writes": "no"
+ },
+ "audio_report": {
+  "closes": "no",
+  "editor": "no",
+  "editor_note": "",
+  "effects": "reads only",
+  "family": "Audio",
+  "helpers": "audio_report",
+  "launches": "no",
+  "writes": "no"
+ },
+ "audio_triggers": {
+  "closes": "no",
+  "editor": "no",
+  "editor_note": "",
+  "effects": "reads only",
+  "family": "Audio",
+  "helpers": "ace_catalog",
+  "launches": "no",
+  "writes": "no"
+ },
+ "bt_check": {
+  "closes": "no",
+  "editor": "yes",
+  "editor_note": "",
+  "effects": "none",
+  "family": "Validators",
+  "helpers": "bt_check",
+  "launches": "no",
+  "writes": "no"
+ },
+ "bt_nodes": {
+  "closes": "no",
+  "editor": "cache",
+  "editor_note": "answers from a saved cache; refresh asks the editor",
+  "effects": "writes the cache; refresh asks the editor",
+  "family": "Catalogs and manual",
+  "helpers": "bt_check",
+  "launches": "no",
+  "writes": "cache"
+ },
+ "build_mesh": {
+  "closes": "no",
+  "editor": "no",
+  "editor_note": "",
+  "effects": "writes files (overwrite-gated)",
+  "family": "Assets",
+  "helpers": "pipeline",
+  "launches": "no",
+  "writes": "yes"
+ },
+ "character_check": {
+  "closes": "no",
+  "editor": "yes",
+  "editor_note": "",
+  "effects": "none (created and released)",
+  "family": "Animation and character",
+  "helpers": "character_check",
+  "launches": "no",
+  "writes": "no"
+ },
+ "click_dialog_button": {
+  "closes": "no",
+  "editor": "yes",
+  "editor_note": "",
+  "effects": "Real click: can discard or confirm",
+  "family": "Editor and bridge control",
+  "helpers": "bridge",
+  "launches": "no",
+  "writes": "no"
+ },
+ "compare_shots": {
+  "closes": "no",
+  "editor": "no",
+  "editor_note": "",
+  "effects": "writes a difference picture and _s.jpg",
+  "family": "Screenshots and visual checks",
+  "helpers": "shot_compare",
+  "launches": "no",
+  "writes": "yes"
+ },
+ "component_properties": {
+  "closes": "no",
+  "editor": "yes",
+  "editor_note": "",
+  "effects": "With values: modifies the entity; with persist=true also SAVES the level",
+  "family": "Level and objects",
+  "helpers": "bridge, entity_check, world_build, server_support.verify_persisted",
+  "launches": "no",
+  "writes": "conditional"
+ },
+ "create_ai_path": {
+  "closes": "no",
+  "editor": "yes",
+  "editor_note": "",
+  "effects": "Creates an object; deletes it if points are off-mesh",
+  "family": "Level and objects",
+  "helpers": "python bridge, bridge.shape.add_points",
+  "launches": "no",
+  "writes": "no"
+ },
+ "create_collision_wall": {
+  "closes": "no",
+  "editor": "yes",
+  "editor_note": "",
+  "effects": "Creates an object, and may WRITE a .mtl into the editor's asset folder",
+  "family": "Level and objects",
+  "helpers": "crypak, python bridge",
+  "launches": "no",
+  "writes": "conditional"
+ },
+ "create_nav_seed_point": {
+  "closes": "no",
+  "editor": "yes",
+  "editor_note": "",
+  "effects": "Creates an object",
+  "family": "Level and objects",
+  "helpers": "python bridge",
+  "launches": "no",
+  "writes": "no"
+ },
+ "create_navigation_area": {
+  "closes": "no",
+  "editor": "yes",
+  "editor_note": "",
+  "effects": "Creates an object; deletes it again on failure",
+  "family": "Level and objects",
+  "helpers": "python bridge",
+  "launches": "no",
+  "writes": "no"
+ },
+ "create_object": {
+  "closes": "no",
+  "editor": "yes",
+  "editor_note": "",
+  "effects": "modifies the level; a graceful close saves it",
+  "family": "Level and objects",
+  "helpers": "object_props",
+  "launches": "no",
+  "writes": "no"
+ },
+ "cryproject_check": {
+  "closes": "no",
+  "editor": "yes",
+  "editor_note": "",
+  "effects": "none",
+  "family": "Validators",
+  "helpers": "cryproject_check",
+  "launches": "no",
+  "writes": "no"
+ },
+ "cvar_info": {
+  "closes": "no",
+  "editor": "no",
+  "editor_note": "",
+  "effects": "reads only",
+  "family": "Catalogs and manual",
+  "helpers": "cvar_catalog",
+  "launches": "no",
+  "writes": "no"
+ },
+ "cvar_search": {
+  "closes": "no",
+  "editor": "no",
+  "editor_note": "",
+  "effects": "reads only",
+  "family": "Catalogs and manual",
+  "helpers": "cvar_catalog",
+  "launches": "no",
+  "writes": "no"
+ },
+ "debug_view": {
+  "closes": "no",
+  "editor": "yes",
+  "editor_note": "",
+  "effects": "temporarily sets cvars; writes pictures",
+  "family": "Screenshots and visual checks",
+  "helpers": "debug_views",
+  "launches": "no",
+  "writes": "yes"
+ },
+ "debug_views": {
+  "closes": "no",
+  "editor": "no",
+  "editor_note": "",
+  "effects": "reads only",
+  "family": "Catalogs and manual",
+  "helpers": "debug_views",
+  "launches": "no",
+  "writes": "no"
+ },
+ "decal_materials": {
+  "closes": "no",
+  "editor": "no",
+  "editor_note": "",
+  "effects": "reads the pak; may build a cache (not verified)",
+  "family": "Catalogs and manual",
+  "helpers": "decal_lab",
+  "launches": "no",
+  "writes": "not verified"
+ },
+ "decal_preview": {
+  "closes": "no",
+  "editor": "yes",
+  "editor_note": "",
+  "effects": "creates then deletes a scratch object; pictures",
+  "family": "Screenshots and visual checks",
+  "helpers": "decal_lab",
+  "launches": "no",
+  "writes": "yes"
+ },
+ "delete_objects": {
+  "closes": "no",
+  "editor": "yes",
+  "editor_note": "",
+  "effects": "modifies the open level (not saved)",
+  "family": "Level and objects",
+  "helpers": "objects",
+  "launches": "no",
+  "writes": "no"
+ },
+ "diff_snapshot": {
+  "closes": "no",
+  "editor": "no",
+  "editor_note": "",
+  "effects": "reads only",
+  "family": "Snapshots",
+  "helpers": "snapshot",
+  "launches": "no",
+  "writes": "no"
+ },
+ "drs_check": {
+  "closes": "no",
+  "editor": "yes",
+  "editor_note": "",
+  "effects": "reload=true runs the DRS ReInit",
+  "family": "Validators",
+  "helpers": "drs_check",
+  "launches": "no",
+  "writes": "no"
+ },
+ "editor_api": {
+  "closes": "no",
+  "editor": "no",
+  "editor_note": "",
+  "effects": "reads only",
+  "family": "Catalogs and manual",
+  "helpers": "editor_api",
+  "launches": "no",
+  "writes": "no"
+ },
+ "editor_commands": {
+  "closes": "no",
+  "editor": "cache",
+  "editor_note": "answers from a saved dump (not verified how it is first made)",
+  "effects": "reads only",
+  "family": "Catalogs and manual",
+  "helpers": "editor_commands",
+  "launches": "no",
+  "writes": "not verified"
+ },
+ "editor_notify": {
+  "closes": "no",
+  "editor": "yes",
+  "editor_note": "",
+  "effects": "shows a notification",
+  "family": "Editor and bridge control",
+  "helpers": "editor_ux",
+  "launches": "no",
+  "writes": "no"
+ },
+ "editor_panel": {
+  "closes": "no",
+  "editor": "yes",
+  "editor_note": "",
+  "effects": "registers a window class and opens a window",
+  "family": "Editor and bridge control",
+  "helpers": "editor_ux",
+  "launches": "no",
+  "writes": "no"
+ },
+ "editor_panes": {
+  "closes": "no",
+  "editor": "optional",
+  "editor_note": "saved list without the editor; refresh asks the editor",
+  "effects": "reads only",
+  "family": "Catalogs and manual",
+  "helpers": "editor_api",
+  "launches": "no",
+  "writes": "no"
+ },
+ "editor_undo": {
+  "closes": "no",
+  "editor": "yes",
+  "editor_note": "",
+  "effects": "undo/redo changes the open level",
+  "family": "Editor and bridge control",
+  "helpers": "editor_ux",
+  "launches": "no",
+  "writes": "no"
+ },
+ "engine_tests": {
+  "closes": "no",
+  "editor": "no",
+  "editor_note": "",
+  "effects": "runs a whitelisted exe; accept_baseline writes engine_data/engine_tests_baseline.json",
+  "family": "Jobs and tests",
+  "helpers": "engine_tests",
+  "launches": "no",
+  "writes": "conditional"
+ },
+ "entity_check": {
+  "closes": "no",
+  "editor": "yes",
+  "editor_note": "",
+  "effects": "none",
+  "family": "Validators",
+  "helpers": "entity_check",
+  "launches": "no",
+  "writes": "no"
+ },
+ "entity_class_properties": {
+  "closes": "no",
+  "editor": "no",
+  "editor_note": "reads the project asset folder from disk",
+  "effects": "reads only",
+  "family": "Project study and knowledge",
+  "helpers": "gamedata_study",
+  "launches": "no",
+  "writes": "no"
+ },
+ "env_check": {
+  "closes": "no",
+  "editor": "no",
+  "editor_note": "",
+  "effects": "reads only",
+  "family": "Validators",
+  "helpers": "env_check",
+  "launches": "no",
+  "writes": "no"
+ },
+ "env_diff": {
+  "closes": "no",
+  "editor": "no",
+  "editor_note": "",
+  "effects": "reads only",
+  "family": "Validators",
+  "helpers": "env_check",
+  "launches": "no",
+  "writes": "no"
+ },
+ "env_variables": {
+  "closes": "no",
+  "editor": "no",
+  "editor_note": "",
+  "effects": "reads only",
+  "family": "Catalogs and manual",
+  "helpers": "env_check",
+  "launches": "no",
+  "writes": "no"
+ },
+ "execute_editor_command": {
+  "closes": "no",
+  "editor": "yes",
+  "editor_note": "",
+  "effects": "Arbitrary editor mutation; deny-list for general.exit etc.",
+  "family": "Editor and bridge control",
+  "helpers": "server_support (editor_api.denied)",
+  "launches": "no",
+  "writes": "no"
+ },
+ "execute_python": {
+  "closes": "no",
+  "editor": "yes",
+  "editor_note": "",
+  "effects": "Arbitrary; regex deny-list",
+  "family": "Editor and bridge control",
+  "helpers": "server_support",
+  "launches": "no",
+  "writes": "no"
+ },
+ "execute_python_script": {
+  "closes": "no",
+  "editor": "yes",
+  "editor_note": "",
+  "effects": "Arbitrary; same deny-list",
+  "family": "Editor and bridge control",
+  "helpers": "server_support",
+  "launches": "no",
+  "writes": "no"
+ },
+ "export_level": {
+  "closes": "no",
+  "editor": "yes",
+  "editor_note": "",
+  "effects": "Writes level export files; answers dialogs with defaults",
+  "family": "Level and objects",
+  "helpers": "server_support.export_logic, _EditorIO",
+  "launches": "no",
+  "writes": "yes"
+ },
+ "flow_check": {
+  "closes": "no",
+  "editor": "yes",
+  "editor_note": "",
+  "effects": "scratch graph only",
+  "family": "Validators",
+  "helpers": "flow_check",
+  "launches": "no",
+  "writes": "no"
+ },
+ "flow_graph_add": {
+  "closes": "no",
+  "editor": "yes",
+  "editor_note": "",
+  "effects": "modifies the level (dry_run available)",
+  "family": "Level and objects",
+  "helpers": "flow_graph, object_props",
+  "launches": "no",
+  "writes": "no"
+ },
+ "flow_nodes": {
+  "closes": "no",
+  "editor": "cache",
+  "editor_note": "answers from a saved cache",
+  "effects": "writes the cache",
+  "family": "Catalogs and manual",
+  "helpers": "flow_check",
+  "launches": "no",
+  "writes": "cache"
+ },
+ "frame_profile": {
+  "closes": "no",
+  "editor": "yes",
+  "editor_note": "",
+  "effects": "sets sys_bp and ed_keepEditorActive, writes bp_frames.xml, restores; compare_cvars sets and restores cvars",
+  "family": "Validators",
+  "helpers": "frame_profile",
+  "launches": "no",
+  "writes": "yes"
+ },
+ "gamesdk_audio": {
+  "closes": "no",
+  "editor": "no",
+  "editor_note": "",
+  "effects": "reads the pak; refresh rebuilds the cache",
+  "family": "Audio",
+  "helpers": "gamesdk_audio",
+  "launches": "no",
+  "writes": "conditional"
+ },
+ "gametoken_check": {
+  "closes": "no",
+  "editor": "no",
+  "editor_note": "",
+  "effects": "reads only",
+  "family": "Validators",
+  "helpers": "gametoken_check",
+  "launches": "no",
+  "writes": "no"
+ },
+ "generate_terrain_height": {
+  "closes": "no",
+  "editor": "yes",
+  "editor_note": "",
+  "effects": "DESTROYS the current heightmap (in memory, saved on next save)",
+  "family": "Terrain and world building",
+  "helpers": "bridge",
+  "launches": "no",
+  "writes": "no"
+ },
+ "get_cvar": {
+  "closes": "no",
+  "editor": "yes",
+  "editor_note": "",
+  "effects": "reads only",
+  "family": "Editor and bridge control",
+  "helpers": "bridge",
+  "launches": "no",
+  "writes": "no"
+ },
+ "get_entity_physics": {
+  "closes": "no",
+  "editor": "yes",
+  "editor_note": "",
+  "effects": "reads only",
+  "family": "Level and objects",
+  "helpers": "bridge",
+  "launches": "no",
+  "writes": "no"
+ },
+ "get_shots": {
+  "closes": "no",
+  "editor": "no",
+  "editor_note": "",
+  "effects": "writes _s.jpg next to the PNGs",
+  "family": "Screenshots and visual checks",
+  "helpers": "jobs",
+  "launches": "no",
+  "writes": "yes"
+ },
+ "goto_position": {
+  "closes": "no",
+  "editor": "yes",
+  "editor_note": "",
+  "effects": "Camera only",
+  "family": "Editor and bridge control",
+  "helpers": "run_console_command",
+  "launches": "no",
+  "writes": "no"
+ },
+ "health_check": {
+  "closes": "no",
+  "editor": "no",
+  "editor_note": "probes for it; works without",
+  "effects": "reads only",
+  "family": "Project and server",
+  "helpers": "health",
+  "launches": "no",
+  "writes": "no"
+ },
+ "inspect_level": {
+  "closes": "no",
+  "editor": "optional",
+  "editor_note": "only to find the open level when level_dir is empty",
+  "effects": "reads only",
+  "family": "Project study and knowledge",
+  "helpers": "level_inventory",
+  "launches": "no",
+  "writes": "no"
+ },
+ "job_kinds": {
+  "closes": "no",
+  "editor": "no",
+  "editor_note": "",
+  "effects": "reads only",
+  "family": "Jobs and tests",
+  "helpers": "jobs",
+  "launches": "no",
+  "writes": "no"
+ },
+ "job_status": {
+  "closes": "no",
+  "editor": "no",
+  "editor_note": "",
+  "effects": "reads only",
+  "family": "Jobs and tests",
+  "helpers": "jobs",
+  "launches": "no",
+  "writes": "no"
+ },
+ "level_check": {
+  "closes": "no",
+  "editor": "optional",
+  "editor_note": "optional (reads files; the review did not record which parts use the editor)",
+  "effects": "reads only",
+  "family": "Validators",
+  "helpers": "level_check",
+  "launches": "no",
+  "writes": "no"
+ },
+ "level_stats": {
+  "closes": "no",
+  "editor": "yes",
+  "editor_note": "",
+  "effects": "the engine writes user/testresults/<level>.xml and depends_<level>.xml",
+  "family": "Validators",
+  "helpers": "level_stats",
+  "launches": "no",
+  "writes": "yes"
+ },
+ "level_validate": {
+  "closes": "no",
+  "editor": "yes",
+  "editor_note": "",
+  "effects": "none",
+  "family": "Validators",
+  "helpers": "level_stats",
+  "launches": "no",
+  "writes": "no"
+ },
+ "link_area_target": {
+  "closes": "no",
+  "editor": "yes",
+  "editor_note": "",
+  "effects": "modifies the level",
+  "family": "Level and objects",
+  "helpers": "object_props",
+  "launches": "no",
+  "writes": "no"
+ },
+ "lint_assets": {
+  "closes": "no",
+  "editor": "no",
+  "editor_note": "",
+  "effects": "reads only",
+  "family": "Validators",
+  "helpers": "asset_lint",
+  "launches": "no",
+  "writes": "no"
+ },
+ "list_archetypes": {
+  "closes": "no",
+  "editor": "no",
+  "editor_note": "reads the project asset folder from disk",
+  "effects": "reads only",
+  "family": "Level and objects",
+  "helpers": "crypak, project_inventory",
+  "launches": "no",
+  "writes": "no"
+ },
+ "list_dialogs": {
+  "closes": "no",
+  "editor": "yes",
+  "editor_note": "",
+  "effects": "reads only",
+  "family": "Editor and bridge control",
+  "helpers": "bridge",
+  "launches": "no",
+  "writes": "no"
+ },
+ "list_entities": {
+  "closes": "no",
+  "editor": "yes",
+  "editor_note": "",
+  "effects": "reads only",
+  "family": "Level and objects",
+  "helpers": "bridge, server_support.page",
+  "launches": "no",
+  "writes": "no"
+ },
+ "list_jobs": {
+  "closes": "no",
+  "editor": "no",
+  "editor_note": "",
+  "effects": "reads only",
+  "family": "Jobs and tests",
+  "helpers": "jobs",
+  "launches": "no",
+  "writes": "no"
+ },
+ "list_objects": {
+  "closes": "no",
+  "editor": "yes",
+  "editor_note": "",
+  "effects": "reads only",
+  "family": "Level and objects",
+  "helpers": "bridge, server_support.page",
+  "launches": "no",
+  "writes": "no"
+ },
+ "list_snapshots": {
+  "closes": "no",
+  "editor": "no",
+  "editor_note": "",
+  "effects": "reads only",
+  "family": "Snapshots",
+  "helpers": "snapshot",
+  "launches": "no",
+  "writes": "no"
+ },
+ "list_terrain_layers": {
+  "closes": "no",
+  "editor": "yes",
+  "editor_note": "",
+  "effects": "reads only",
+  "family": "Terrain and world building",
+  "helpers": "bridge",
+  "launches": "no",
+  "writes": "no"
+ },
+ "list_windows": {
+  "closes": "no",
+  "editor": "yes",
+  "editor_note": "",
+  "effects": "reads only",
+  "family": "Editor and bridge control",
+  "helpers": "bridge",
+  "launches": "no",
+  "writes": "no"
+ },
+ "load_level": {
+  "closes": "no",
+  "editor": "yes",
+  "editor_note": "",
+  "effects": "SAVES the open level first (default save_current=True), then switches levels",
+  "family": "Level and objects",
+  "helpers": "server_support.load_level_logic, _EditorIO, world_build",
+  "launches": "no",
+  "writes": "yes"
+ },
+ "make_music": {
+  "closes": "no",
+  "editor": "no",
+  "editor_note": "",
+  "effects": "runs a job; writes .ogg and claude_music.xml",
+  "family": "Audio",
+  "helpers": "start_job (jobs)",
+  "launches": "no",
+  "writes": "yes"
+ },
+ "make_texture": {
+  "closes": "no",
+  "editor": "no",
+  "editor_note": "",
+  "effects": "writes files (refuses to replace unless overwrite)",
+  "family": "Assets",
+  "helpers": "pipeline",
+  "launches": "no",
+  "writes": "yes"
+ },
+ "mannequin_check": {
+  "closes": "no",
+  "editor": "yes",
+  "editor_note": "",
+  "effects": "none; reload=true refused without confirm_reload",
+  "family": "Animation and character",
+  "helpers": "mannequin_check",
+  "launches": "no",
+  "writes": "no"
+ },
+ "mannequin_clips": {
+  "closes": "no",
+  "editor": "cache",
+  "editor_note": "only the first run, which writes the cache",
+  "effects": "writes the cache engine_data/mannequin_clips.json",
+  "family": "Animation and character",
+  "helpers": "mannequin_check",
+  "launches": "no",
+  "writes": "cache"
+ },
+ "manual_toc": {
+  "closes": "no",
+  "editor": "no",
+  "editor_note": "",
+  "effects": "reads only; needs a saved offline copy of the manual (not shipped; set CRYENGINE_DOCS, see catalogs/scrape_cryengine_docs.py)",
+  "family": "Catalogs and manual",
+  "helpers": "manual",
+  "launches": "no",
+  "writes": "no"
+ },
+ "material_check": {
+  "closes": "no",
+  "editor": "yes",
+  "editor_note": "",
+  "effects": "registers materials in the editor session; no file changes",
+  "family": "Validators",
+  "helpers": "material_check",
+  "launches": "no",
+  "writes": "no"
+ },
+ "nav_map": {
+  "closes": "no",
+  "editor": "yes",
+  "editor_note": "",
+  "effects": "reads only",
+  "family": "Validators",
+  "helpers": "nav_check",
+  "launches": "no",
+  "writes": "no"
+ },
+ "nav_reach": {
+  "closes": "no",
+  "editor": "yes",
+  "editor_note": "",
+  "effects": "reads only",
+  "family": "Validators",
+  "helpers": "nav_check",
+  "launches": "no",
+  "writes": "no"
+ },
+ "new_level": {
+  "closes": "no",
+  "editor": "yes",
+  "editor_note": "",
+  "effects": "SAVES the open level, creates level files, switches the editor",
+  "family": "Terrain and world building",
+  "helpers": "world_build",
+  "launches": "no",
+  "writes": "yes"
+ },
+ "object_check": {
+  "closes": "no",
+  "editor": "yes",
+  "editor_note": "",
+  "effects": "none",
+  "family": "Validators",
+  "helpers": "object_check",
+  "launches": "no",
+  "writes": "no"
+ },
+ "object_properties": {
+  "closes": "no",
+  "editor": "yes",
+  "editor_note": "",
+  "effects": "modifies the level when set is given",
+  "family": "Level and objects",
+  "helpers": "object_props",
+  "launches": "no",
+  "writes": "no"
+ },
+ "object_types": {
+  "closes": "no",
+  "editor": "optional",
+  "editor_note": "not needed when text is given",
+  "effects": "reads only",
+  "family": "Level and objects",
+  "helpers": "object_props, object_catalog",
+  "launches": "no",
+  "writes": "no"
+ },
+ "outline_asset_xml": {
+  "closes": "no",
+  "editor": "no",
+  "editor_note": "reads the project asset folder from disk",
+  "effects": "reads only",
+  "family": "Project study and knowledge",
+  "helpers": "xml_outline",
+  "launches": "no",
+  "writes": "no"
+ },
+ "particle_info": {
+  "closes": "no",
+  "editor": "cache",
+  "editor_note": "as particle_search",
+  "effects": "reads only",
+  "family": "Catalogs and manual",
+  "helpers": "particle_catalog",
+  "launches": "no",
+  "writes": "not verified"
+ },
+ "particle_search": {
+  "closes": "no",
+  "editor": "cache",
+  "editor_note": "answers from a saved cache; the first read may need the editor (not verified)",
+  "effects": "reads only",
+  "family": "Catalogs and manual",
+  "helpers": "particle_catalog",
+  "launches": "no",
+  "writes": "not verified"
+ },
+ "pbs_check": {
+  "closes": "no",
+  "editor": "no",
+  "editor_note": "",
+  "effects": "reads only",
+  "family": "Validators",
+  "helpers": "pbs_check",
+  "launches": "no",
+  "writes": "no"
+ },
+ "pfx_check": {
+  "closes": "no",
+  "editor": "yes",
+  "editor_note": "",
+  "effects": "writes the engine's rewrite to engine_data/pfx_scratch",
+  "family": "Validators",
+  "helpers": "particle_catalog",
+  "launches": "no",
+  "writes": "yes"
+ },
+ "pfx_preview": {
+  "closes": "no",
+  "editor": "yes",
+  "editor_note": "",
+  "effects": "creates then deletes a scratch entity; writes pictures",
+  "family": "Screenshots and visual checks",
+  "helpers": "pfx_author",
+  "launches": "no",
+  "writes": "yes"
+ },
+ "pfx_write": {
+  "closes": "no",
+  "editor": "yes",
+  "editor_note": "",
+  "effects": "writes project files; overwrite=true replaces",
+  "family": "Assets",
+  "helpers": "pfx_author, particle_catalog",
+  "launches": "no",
+  "writes": "yes"
+ },
+ "ping": {
+  "closes": "no",
+  "editor": "yes",
+  "editor_note": "",
+  "effects": "none",
+  "family": "Project and server",
+  "helpers": "get_cvar",
+  "launches": "no",
+  "writes": "no"
+ },
+ "place_object": {
+  "closes": "no",
+  "editor": "yes",
+  "editor_note": "",
+  "effects": "modifies the open level (not saved)",
+  "family": "Level and objects",
+  "helpers": "objects",
+  "launches": "no",
+  "writes": "no"
+ },
+ "plan_character_collider": {
+  "closes": "no",
+  "editor": "no",
+  "editor_note": "",
+  "effects": "none",
+  "family": "Project study and knowledge",
+  "helpers": "character_collider",
+  "launches": "no",
+  "writes": "no"
+ },
+ "preview_voice": {
+  "closes": "no",
+  "editor": "no",
+  "editor_note": "",
+  "effects": "writes files (scratch only)",
+  "family": "Audio",
+  "helpers": "pipeline",
+  "launches": "no",
+  "writes": "yes"
+ },
+ "project_audit": {
+  "closes": "no",
+  "editor": "optional",
+  "editor_note": "optional (the review did not record which validators use the editor)",
+  "effects": "accept_baseline writes audit_baseline.json",
+  "family": "Validators",
+  "helpers": "project_audit",
+  "launches": "no",
+  "writes": "conditional"
+ },
+ "project_info": {
+  "closes": "no",
+  "editor": "optional",
+  "editor_note": "queried if reachable; the file-side answer works without it",
+  "effects": "reads only",
+  "family": "Project and server",
+  "helpers": "project_root, bridge_py",
+  "launches": "no",
+  "writes": "no"
+ },
+ "project_overview": {
+  "closes": "no",
+  "editor": "no",
+  "editor_note": "reads the project asset folder from disk",
+  "effects": "reads only",
+  "family": "Project study and knowledge",
+  "helpers": "project_inventory",
+  "launches": "no",
+  "writes": "no"
+ },
+ "query_knowledge": {
+  "closes": "no",
+  "editor": "no",
+  "editor_note": "",
+  "effects": "reads only",
+  "family": "Project study and knowledge",
+  "helpers": "rag_query",
+  "launches": "no",
+  "writes": "no"
+ },
+ "rc_options": {
+  "closes": "no",
+  "editor": "no",
+  "editor_note": "not needed; refresh runs rc.exe",
+  "effects": "refresh runs rc.exe /help and rewrites the cache",
+  "family": "Catalogs and manual",
+  "helpers": "rc_catalog",
+  "launches": "no",
+  "writes": "conditional"
+ },
+ "rc_presets": {
+  "closes": "no",
+  "editor": "no",
+  "editor_note": "",
+  "effects": "reads only",
+  "family": "Assets",
+  "helpers": "rc_catalog",
+  "launches": "no",
+  "writes": "no"
+ },
+ "read_asset_file": {
+  "closes": "no",
+  "editor": "no",
+  "editor_note": "reads the project asset folder from disk",
+  "effects": "reads only",
+  "family": "Assets",
+  "helpers": "crypak",
+  "launches": "no",
+  "writes": "no"
+ },
+ "read_job_log": {
+  "closes": "no",
+  "editor": "no",
+  "editor_note": "",
+  "effects": "reads only",
+  "family": "Jobs and tests",
+  "helpers": "jobs",
+  "launches": "no",
+  "writes": "no"
+ },
+ "read_manual_page": {
+  "closes": "no",
+  "editor": "no",
+  "editor_note": "",
+  "effects": "reads only; needs a saved offline copy of the manual (not shipped; set CRYENGINE_DOCS, see catalogs/scrape_cryengine_docs.py)",
+  "family": "Catalogs and manual",
+  "helpers": "manual",
+  "launches": "no",
+  "writes": "no"
+ },
+ "read_output": {
+  "closes": "no",
+  "editor": "no",
+  "editor_note": "",
+  "effects": "reads only",
+  "family": "Project and server",
+  "helpers": "server_support",
+  "launches": "no",
+  "writes": "no"
+ },
+ "regenerate_navigation": {
+  "closes": "no",
+  "editor": "yes",
+  "editor_note": "",
+  "effects": "Starts a background navmesh rebuild",
+  "family": "Level and objects",
+  "helpers": "execute_editor_command",
+  "launches": "no",
+  "writes": "no"
+ },
+ "render_tour": {
+  "closes": "no",
+  "editor": "yes",
+  "editor_note": "",
+  "effects": "changes then restores cvars; pictures",
+  "family": "Screenshots and visual checks",
+  "helpers": "render_tour",
+  "launches": "no",
+  "writes": "yes"
+ },
+ "render_voices": {
+  "closes": "no",
+  "editor": "no",
+  "editor_note": "",
+  "effects": "runs a job; writes .ogg and the audio library into Assets",
+  "family": "Audio",
+  "helpers": "start_job (jobs)",
+  "launches": "no",
+  "writes": "yes"
+ },
+ "restore_files": {
+  "closes": "no",
+  "editor": "no",
+  "editor_note": "",
+  "effects": "writes files (overwrite=true replaces live files, after a before_restore snapshot)",
+  "family": "Snapshots",
+  "helpers": "snapshot, jobs",
+  "launches": "no",
+  "writes": "yes"
+ },
+ "run_console_command": {
+  "closes": "no",
+  "editor": "yes",
+  "editor_note": "",
+  "effects": "Whatever the command does (changes CVars/state). Deny-list: quit/exit, bridge.window.close, bridge.execute_* of a dangerous call, unless really=true",
+  "family": "Editor and bridge control",
+  "helpers": "server_support, bridge_py",
+  "launches": "no",
+  "writes": "no"
+ },
+ "sample_entity_physics": {
+  "closes": "no",
+  "editor": "yes",
+  "editor_note": "",
+  "effects": "reads only (blocks a worker for samples*interval)",
+  "family": "Animation and character",
+  "helpers": "bridge",
+  "launches": "no",
+  "writes": "no"
+ },
+ "save_level": {
+  "closes": "no",
+  "editor": "yes",
+  "editor_note": "",
+  "effects": "writes level files",
+  "family": "Level and objects",
+  "helpers": "world_build",
+  "launches": "no",
+  "writes": "yes"
+ },
+ "schematyc_info": {
+  "closes": "no",
+  "editor": "cache",
+  "editor_note": "",
+  "effects": "answers from engine_data/schematyc_env.json; the file is not shipped: run python catalogs/schematyc_catalog.py --capture once with the editor open",
+  "family": "Catalogs and manual",
+  "helpers": "schematyc_catalog",
+  "launches": "no",
+  "writes": "no"
+ },
+ "schematyc_search": {
+  "closes": "no",
+  "editor": "cache",
+  "editor_note": "",
+  "effects": "answers from engine_data/schematyc_env.json; the file is not shipped: run python catalogs/schematyc_catalog.py --capture once with the editor open",
+  "family": "Catalogs and manual",
+  "helpers": "schematyc_catalog",
+  "launches": "no",
+  "writes": "no"
+ },
+ "search_manual": {
+  "closes": "no",
+  "editor": "no",
+  "editor_note": "",
+  "effects": "reads only; needs a saved offline copy of the manual (not shipped; set CRYENGINE_DOCS, see catalogs/scrape_cryengine_docs.py)",
+  "family": "Catalogs and manual",
+  "helpers": "manual",
+  "launches": "no",
+  "writes": "no"
+ },
+ "select_terrain_layer": {
+  "closes": "no",
+  "editor": "yes",
+  "editor_note": "",
+  "effects": "Editor selection state only",
+  "family": "Terrain and world building",
+  "helpers": "bridge",
+  "launches": "no",
+  "writes": "no"
+ },
+ "sequence_check": {
+  "closes": "no",
+  "editor": "yes",
+  "editor_note": "",
+  "effects": "throw-away sequence only",
+  "family": "Validators",
+  "helpers": "sequence_check",
+  "launches": "no",
+  "writes": "no"
+ },
+ "server_info": {
+  "closes": "no",
+  "editor": "no",
+  "editor_note": "",
+  "effects": "reads only",
+  "family": "Project and server",
+  "helpers": "server_support",
+  "launches": "no",
+  "writes": "no"
+ },
+ "set_ai_debug": {
+  "closes": "no",
+  "editor": "yes",
+  "editor_note": "",
+  "effects": "Sets 5 CVars, never restores the old values",
+  "family": "Level and objects",
+  "helpers": "bridge",
+  "launches": "no",
+  "writes": "no"
+ },
+ "set_cvar": {
+  "closes": "no",
+  "editor": "yes",
+  "editor_note": "",
+  "effects": "Changes live engine state",
+  "family": "Editor and bridge control",
+  "helpers": "bridge",
+  "launches": "no",
+  "writes": "no"
+ },
+ "set_terrain_layer_texture": {
+  "closes": "no",
+  "editor": "yes",
+  "editor_note": "",
+  "effects": "Modifies the layer",
+  "family": "Terrain and world building",
+  "helpers": "bridge",
+  "launches": "no",
+  "writes": "no"
+ },
+ "shader_info": {
+  "closes": "no",
+  "editor": "no",
+  "editor_note": "",
+  "effects": "reads only",
+  "family": "Catalogs and manual",
+  "helpers": "shader_catalog",
+  "launches": "no",
+  "writes": "no"
+ },
+ "shader_search": {
+  "closes": "no",
+  "editor": "no",
+  "editor_note": "",
+  "effects": "reads only",
+  "family": "Catalogs and manual",
+  "helpers": "shader_catalog",
+  "launches": "no",
+  "writes": "no"
+ },
+ "shoot_game": {
+  "closes": "yes",
+  "editor": "no",
+  "editor_note": "",
+  "effects": "closes the editor; writes job_runs/<id>_shots and _s.jpg files",
+  "family": "Screenshots and visual checks",
+  "helpers": "health, jobs, ffmpeg via jobs.run",
+  "launches": "yes",
+  "writes": "yes"
+ },
+ "snapshot_project": {
+  "closes": "no",
+  "editor": "no",
+  "editor_note": "",
+  "effects": "writes files (snapshot store in _snapshots next to the project, or CRYENGINE_SNAPSHOT_DIR; the first snapshot copies the whole project)",
+  "family": "Snapshots",
+  "helpers": "snapshot",
+  "launches": "no",
+  "writes": "yes"
+ },
+ "spawn_archetype": {
+  "closes": "no",
+  "editor": "yes",
+  "editor_note": "",
+  "effects": "Creates an object (unsaved)",
+  "family": "Level and objects",
+  "helpers": "crypak, python bridge",
+  "launches": "no",
+  "writes": "no"
+ },
+ "spec_group": {
+  "closes": "no",
+  "editor": "no",
+  "editor_note": "",
+  "effects": "reads only",
+  "family": "Catalogs and manual",
+  "helpers": "cvar_catalog",
+  "launches": "no",
+  "writes": "no"
+ },
+ "spline_points": {
+  "closes": "no",
+  "editor": "yes",
+  "editor_note": "",
+  "effects": "modifies the level",
+  "family": "Level and objects",
+  "helpers": "object_props",
+  "launches": "no",
+  "writes": "no"
+ },
+ "start_job": {
+  "closes": "depends on kind",
+  "editor": "no",
+  "editor_note": "",
+  "effects": "runs a job; closes the editor for package/tests/shader_cache/shoot/visual/cvar_probe, gated by allow_editor_close",
+  "family": "Jobs and tests",
+  "helpers": "jobs",
+  "launches": "depends on kind",
+  "writes": "yes"
+ },
+ "stop_job": {
+  "closes": "no",
+  "editor": "no",
+  "editor_note": "",
+  "effects": "kills the job's processes; a job that had closed the editor leaves it closed",
+  "family": "Jobs and tests",
+  "helpers": "jobs",
+  "launches": "no",
+  "writes": "no"
+ },
+ "study_gamedata": {
+  "closes": "no",
+  "editor": "no",
+  "editor_note": "reads the project asset folder from disk",
+  "effects": "reads only",
+  "family": "Project study and knowledge",
+  "helpers": "gamedata_study, level_study",
+  "launches": "no",
+  "writes": "no"
+ },
+ "study_level": {
+  "closes": "no",
+  "editor": "optional",
+  "editor_note": "only to find the open level when level_dir is empty",
+  "effects": "reads only",
+  "family": "Project study and knowledge",
+  "helpers": "level_study",
+  "launches": "no",
+  "writes": "no"
+ },
+ "take_screenshot": {
+  "closes": "no",
+  "editor": "yes",
+  "editor_note": "",
+  "effects": "Writes an image file (may overwrite an existing one)",
+  "family": "Screenshots and visual checks",
+  "helpers": "bridge",
+  "launches": "no",
+  "writes": "yes"
+ },
+ "teleport_entity": {
+  "closes": "no",
+  "editor": "yes",
+  "editor_note": "",
+  "effects": "changes the entity position (undo not verified)",
+  "family": "Level and objects",
+  "helpers": "bridge",
+  "launches": "no",
+  "writes": "no"
+ },
+ "terrain_height": {
+  "closes": "no",
+  "editor": "yes",
+  "editor_note": "",
+  "effects": "reads only",
+  "family": "Terrain and world building",
+  "helpers": "world_build",
+  "launches": "no",
+  "writes": "no"
+ },
+ "terrain_hole": {
+  "closes": "no",
+  "editor": "yes",
+  "editor_note": "",
+  "effects": "modifies the level",
+  "family": "Terrain and world building",
+  "helpers": "world_build",
+  "launches": "no",
+  "writes": "no"
+ },
+ "terrain_layers": {
+  "closes": "no",
+  "editor": "yes",
+  "editor_note": "",
+  "effects": "add creates a layer; bake repaints and exports the colour texture",
+  "family": "Terrain and world building",
+  "helpers": "world_build",
+  "launches": "no",
+  "writes": "conditional"
+ },
+ "terrain_shape": {
+  "closes": "no",
+  "editor": "yes",
+  "editor_note": "",
+  "effects": "modifies the open terrain in memory; writes a backup to engine_data/terrain_backups",
+  "family": "Terrain and world building",
+  "helpers": "world_build",
+  "launches": "no",
+  "writes": "yes"
+ },
+ "test_plan": {
+  "closes": "no",
+  "editor": "no",
+  "editor_note": "",
+  "effects": "reads only",
+  "family": "Jobs and tests",
+  "helpers": "jobs",
+  "launches": "no",
+  "writes": "no"
+ },
+ "texture_recipes": {
+  "closes": "no",
+  "editor": "no",
+  "editor_note": "",
+  "effects": "reads only",
+  "family": "Assets",
+  "helpers": "pipeline",
+  "launches": "no",
+  "writes": "no"
+ },
+ "tool_guide": {
+  "closes": "no",
+  "editor": "no",
+  "editor_note": "",
+  "effects": "none",
+  "family": "Project and server",
+  "helpers": "FAMILIES, FastMCP internals",
+  "launches": "no",
+  "writes": "no"
+ },
+ "ui_check": {
+  "closes": "no",
+  "editor": "yes",
+  "editor_note": "",
+  "effects": "init_movie loads the movie in the editor",
+  "family": "Validators",
+  "helpers": "ui_check",
+  "launches": "no",
+  "writes": "no"
+ },
+ "uqs_catalog": {
+  "closes": "no",
+  "editor": "cache",
+  "editor_note": "answers from a saved cache",
+  "effects": "writes the cache; engine_data/uqs_catalog.json is not shipped: it is captured once with the editor open",
+  "family": "Catalogs and manual",
+  "helpers": "uqs_check",
+  "launches": "no",
+  "writes": "cache"
+ },
+ "uqs_check": {
+  "closes": "no",
+  "editor": "yes",
+  "editor_note": "",
+  "effects": "none; a file path is checked as a temporary registered copy",
+  "family": "Validators",
+  "helpers": "uqs_check",
+  "launches": "no",
+  "writes": "no"
+ },
+ "use_project": {
+  "closes": "no",
+  "editor": "no",
+  "editor_note": "",
+  "effects": "writes or deletes active_project.txt (next to project_root.py)",
+  "family": "Project and server",
+  "helpers": "project_root",
+  "launches": "no",
+  "writes": "yes"
+ },
+ "vegetation": {
+  "closes": "no",
+  "editor": "yes",
+  "editor_note": "",
+  "effects": "modifies the open level",
+  "family": "Terrain and world building",
+  "helpers": "world_build",
+  "launches": "no",
+  "writes": "no"
+ },
+ "visarea_check": {
+  "closes": "no",
+  "editor": "optional",
+  "editor_note": "only the probes need it",
+  "effects": "reads only",
+  "family": "Validators",
+  "helpers": "visarea_check",
+  "launches": "no",
+  "writes": "no"
+ },
+ "visual_check": {
+  "closes": "yes",
+  "editor": "no",
+  "editor_note": "",
+  "effects": "closes the editor; accept=true replaces the baseline; writes job_runs",
+  "family": "Screenshots and visual checks",
+  "helpers": "jobs, shot_compare",
+  "launches": "yes",
+  "writes": "yes"
+ },
+ "visual_status": {
+  "closes": "no",
+  "editor": "no",
+  "editor_note": "",
+  "effects": "reads only",
+  "family": "Screenshots and visual checks",
+  "helpers": "shot_compare, jobs, health",
+  "launches": "no",
+  "writes": "no"
+ },
+ "wait_for_editor": {
+  "closes": "no",
+  "editor": "no",
+  "editor_note": "",
+  "effects": "only probes; with CLAUDE_AUTO_RECOVER=1 (off by default) it may start Sandbox.exe and replace a crashed one with taskkill /F via bridge_watchdog.recover",
+  "family": "Editor and bridge control",
+  "helpers": "bridge_py, bridge_watchdog, health",
+  "launches": "no",
+  "writes": "no"
+ },
+ "write_material": {
+  "closes": "no",
+  "editor": "no",
+  "editor_note": "",
+  "effects": "writes files (overwrite-gated)",
+  "family": "Assets",
+  "helpers": "pipeline",
+  "launches": "no",
+  "writes": "yes"
+ }
+}

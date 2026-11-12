@@ -1,0 +1,7 @@
+# Python 3.10 or newer
+mcp>=1.2.0
+numpy
+
+# Optional, only for the MotionBricks / Kimodo animation scripts (not needed by the server):
+#   torch, motionbricks   (obtain and install them yourself; see NOTICE.md)
+# Provided by the editor's embedded Python; do not pip-install: PySide2, SandboxBridge

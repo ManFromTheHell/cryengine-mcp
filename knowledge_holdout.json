@@ -1,0 +1,488 @@
+{
+ "name": "knowledge_holdout",
+ "written": "2026-10-23",
+ "purpose": "HOLD-OUT evaluation of query_knowledge. Real questions an AI would ask while building a game with these tools, in the words of someone who has not read the corpus. Graded by the expected CHUNK ID(S): a result counts when its id, or the id of the chunk it was split from (field parent), is in 'expected'. expected=null means the corpus has no chunk that answers it (a GAP): those are reported separately and are NOT part of rank-1 / top-3 / MRR. The 25 first questions are the audit's (GAPS_AND_IMPROVEMENTS_2026-10-23.md, K-07); the rest were written by the same author before any retrieval change.",
+ "rules": [
+  "NEVER tune synonyms, stopwords or weights on this file. Tune on knowledge_dev.json. This file is run for the record (before / after a change), not as a feedback loop.",
+  "expected ids were written from the corpus listing and a grep of the text, not from the search results.",
+  "A question whose honest answer is 'the corpus does not have it' is a gap (expected null); it is not 'fixed' by loosening the grade, only by writing the chunk."
+ ],
+ "recorded": {
+  "note": "Run exactly twice for the record, never used for tuning. n = 47 graded questions (5 gaps excluded). Grading is tolerant: 2-6 acceptable chunk ids per question, so these rates are higher than the audit's strict 44% on its 25 questions.",
+  "before_2026-10-23": {
+   "what": "mcp rag_query.py (synonyms) on the 377-chunk corpus as it was",
+   "rank1": 0.638,
+   "top3": 0.915,
+   "top5": 0.979,
+   "mrr": 0.782,
+   "for_claude_rag_query_without_synonyms": {
+    "rank1": 0.617,
+    "top3": 0.894,
+    "mrr": 0.766
+   }
+  },
+  "after_2026-10-23": {
+   "what": "new rag_query.py (title x4, tags x3, synonyms x0.6, filler words dropped, superseded excluded) on the 437+ chunk corpus (categories merged, stale chunks retired, 17 long chunks split)",
+   "rank1": 0.702,
+   "top3": 0.979,
+   "top5": 0.979,
+   "mrr": 0.823
+  },
+  "floor_for_test_knowledge_eval": {
+   "rank1": 0.65,
+   "top3": 0.93,
+   "mrr": 0.78
+  },
+  "known_limits": "A search always returns something: the 5 gap questions (mini map, translate, multiplayer, rebind keys, draw distance for trees) get a confident-looking wrong top hit. No abstention score exists yet."
+ },
+ "questions": [
+  {
+   "id": "H01",
+   "q": "add a bench villagers sit on",
+   "expected": [
+    "playbook-npc-kimodo-variants-and-turns",
+    "decision-kimodo-used-for-actions",
+    "proposal-sit-anchors-on-the-benches",
+    "fact-kimodo-doc-corrected-level-has-benches"
+   ],
+   "note": "partial: the sit clips exist and the chunks say sit is not wired; there is no sit-anchor recipe | 2026-10-23: recipe chunks now exist (added to expected after reading them, not tuned to the scorer)"
+  },
+  {
+   "id": "H02",
+   "q": "package is missing textures",
+   "expected": [
+    "trap-package-missing-presplit-textures",
+    "trap-packager-compiles-nothing-presplit-dds"
+   ]
+  },
+  {
+   "id": "H03",
+   "q": "how to make rain",
+   "expected": [
+    "howto-rain-clouds-darker",
+    "time-of-day-and-rain",
+    "howto-soundscape-weather-night-wind"
+   ]
+  },
+  {
+   "id": "H04",
+   "q": "why is my material black",
+   "expected": [
+    "playbook-natural-materials-from-the-gamesdk",
+    "ashvale-terrain-texture-ctc"
+   ]
+  },
+  {
+   "id": "H05",
+   "q": "place a door that opens",
+   "expected": [
+    "gamesdk-interactive-entities",
+    "farm-gate-component",
+    "playbook-second-level-travel",
+    "interactable-and-ingame-menu"
+   ]
+  },
+  {
+   "id": "H06",
+   "q": "save the game",
+   "expected": [
+    "savegame-component-player"
+   ]
+  },
+  {
+   "id": "H07",
+   "q": "add a new animation",
+   "expected": [
+    "playbook-villager-animation-from-the-library",
+    "fbx-animation-to-caf-headless",
+    "caf-into-animation-set",
+    "playbook-kimodo-motion-to-villager-clip",
+    "playbook-motionbricks-to-villager-clip"
+   ]
+  },
+  {
+   "id": "H08",
+   "q": "new enemy type",
+   "expected": [
+    "ashvale-bandit-faction",
+    "howto-archer-npc-bow-and-arrows",
+    "villager-brain-utility"
+   ]
+  },
+  {
+   "id": "H09",
+   "q": "add a mini map",
+   "expected": null,
+   "note": "GAP: the pause map is one baked image (make_map.py); no minimap or compass chunk"
+  },
+  {
+   "id": "H10",
+   "q": "add a river",
+   "expected": [
+    "tooling-water-volume-points-and-material-in-the-editor",
+    "finding-water-in-the-open-source-projects-and-the-manual",
+    "tooling-object-properties-through-the-engine-serializer"
+   ]
+  },
+  {
+   "id": "H11",
+   "q": "game runs slowly",
+   "expected": [
+    "measure-packaged-performance-statoscope",
+    "perf-measuring-a-level",
+    "tooling-frame-profile-sys-bp-frames-editor-viewport",
+    "merged-mesh-grass-measured"
+   ]
+  },
+  {
+   "id": "H12",
+   "q": "add background music",
+   "expected": [
+    "fact-measured-audio-of-the-music-and-voices",
+    "howto-soundscape-weather-night-wind",
+    "tooling-mcp-editor-free-tools-lint-jobs-shoot-pipeline",
+    "howto-add-a-music-loop-to-the-ace-library"
+   ],
+   "note": "partial: music is made by the make_music job; no recipe chunk | 2026-10-23: recipe chunks now exist (added to expected after reading them, not tuned to the scorer)"
+  },
+  {
+   "id": "H13",
+   "q": "add a HUD health bar",
+   "expected": [
+    "gamesdk-ui",
+    "ingame-menu-pixels",
+    "interactable-and-ingame-menu",
+    "ashvale-game-mode-gate",
+    "howto-add-a-hud-element-immediate-draw"
+   ],
+   "note": "partial: no HUD-element recipe | 2026-10-23: recipe chunks now exist (added to expected after reading them, not tuned to the scorer)"
+  },
+  {
+   "id": "H14",
+   "q": "translate the game",
+   "expected": null,
+   "note": "GAP: gamesdk-rules-input-difficulty names localization but there is no pipeline (audit E-03)"
+  },
+  {
+   "id": "H15",
+   "q": "campfire with fire and smoke",
+   "expected": [
+    "trap-legacy-particle-emits-along-y",
+    "particles-two-systems",
+    "tooling-pfx-author-and-editor-viewport-preview",
+    "howto-lamp-falloff-night-exposure"
+   ]
+  },
+  {
+   "id": "H16",
+   "q": "multiplayer",
+   "expected": null,
+   "note": "GAP: only trap-map-s-pure-client (a Release listen server never loads) and the GameSDK airfield level; no netcode chunk"
+  },
+  {
+   "id": "H17",
+   "q": "inventory and pickup",
+   "expected": [
+    "howto-pickup-entities-bread-coins"
+   ]
+  },
+  {
+   "id": "H18",
+   "q": "player walks through my prop",
+   "expected": [
+    "craft-invisible-walls",
+    "interactable-and-ingame-menu",
+    "gamesdk-props-destruction"
+   ],
+   "note": "partial: no chunk says how to give a build_mesh prop collision"
+  },
+  {
+   "id": "H19",
+   "q": "NPC stuck",
+   "expected": [
+    "playbook-symptom-to-tool",
+    "playbook-navmesh",
+    "nav-area-missing-check",
+    "npc-airborne-on-slopes",
+    "ashvale-nav-indoors",
+    "npc-duplicate-components"
+   ]
+  },
+  {
+   "id": "H20",
+   "q": "rebind keys",
+   "expected": null,
+   "note": "GAP: gamesdk-rules-input-difficulty lists the action maps; no rebinding recipe (audit G-22)"
+  },
+  {
+   "id": "H21",
+   "q": "draw distance for trees",
+   "expected": null,
+   "note": "GAP: only the merged-mesh grass view distance (e_MergedMeshesViewDistRatio) and Road ViewDistRatio are mentioned; nothing for vegetation objects"
+  },
+  {
+   "id": "H22",
+   "q": "cutscene camera",
+   "expected": [
+    "cutscene-camera-and-trackview",
+    "howto-trackview-sequence-from-code",
+    "craft-cinematics"
+   ]
+  },
+  {
+   "id": "H23",
+   "q": "vehicle or horse",
+   "expected": [
+    "gamesdk-vehicles",
+    "fact-vehicles-and-mounts-not-built"
+   ],
+   "note": "partial: GameSDK vehicles only; no mount | 2026-10-23: recipe chunks now exist (added to expected after reading them, not tuned to the scorer)"
+  },
+  {
+   "id": "H24",
+   "q": "change time of day at runtime",
+   "expected": [
+    "time-of-day-and-rain",
+    "ashvale-atmosphere",
+    "howto-environment-presets-scripted"
+   ]
+  },
+  {
+   "id": "H25",
+   "q": "the bandit does not notice the player",
+   "expected": [
+    "ai-perception-components",
+    "vision-map-from-cpp",
+    "villager-player-reactions",
+    "ashvale-bandit-faction"
+   ]
+  },
+  {
+   "id": "H26",
+   "q": "terrain is black in my new level",
+   "expected": [
+    "ashvale-terrain-texture-ctc",
+    "playbook-new-level-and-terrain",
+    "playbook-build-world-tools"
+   ]
+  },
+  {
+   "id": "H27",
+   "q": "make the grass denser",
+   "expected": [
+    "fact-grass-retune-density-and-size",
+    "merged-mesh-grass-measured",
+    "howto-paint-vegetation-editor-brush"
+   ]
+  },
+  {
+   "id": "H28",
+   "q": "footsteps sound the same on every surface",
+   "expected": [
+    "gamesdk-material-effects",
+    "tooling-gamesdk-audio-catalog-real-versus-placeholder",
+    "howto-material-effects-surface-driven-footsteps",
+    "howto-animation-events-and-where-footsteps-come-from"
+   ],
+   "note": "2026-10-23: recipe chunks now exist (added to expected after reading them, not tuned to the scorer)"
+  },
+  {
+   "id": "H29",
+   "q": "no shadows in the packaged game",
+   "expected": [
+    "trap-launcher-spec0-no-shadows"
+   ]
+  },
+  {
+   "id": "H30",
+   "q": "my menu button does not show up",
+   "expected": [
+    "trap-flashui-button-after-tile-grid-not-drawn",
+    "tooling-ui-check-flashui-undeclared-name-is-silent"
+   ]
+  },
+  {
+   "id": "H31",
+   "q": "subtitles for a line of dialogue",
+   "expected": [
+    "drs-dialogue-and-subtitles",
+    "playbook-dialogue-and-voice"
+   ]
+  },
+  {
+   "id": "H32",
+   "q": "game crashes when I quit",
+   "expected": [
+    "trap-plugin-threads-pin-dll-quit-crash"
+   ]
+  },
+  {
+   "id": "H33",
+   "q": "normal map sparkles at night",
+   "expected": [
+    "trap-normal-map-strength-sparkles-at-night"
+   ]
+  },
+  {
+   "id": "H34",
+   "q": "how do I undo what a tool changed in my level",
+   "expected": [
+    "tooling-editor-undo-and-notifications",
+    "tooling-snapshot-tools-backup-of-the-work"
+   ]
+  },
+  {
+   "id": "H35",
+   "q": "villagers should jump over a fence",
+   "expected": [
+    "auto-vault-links",
+    "offmesh-link-component-traversal-fix",
+    "offmesh-link-follow-game-side",
+    "nav-offmesh-links-smartobjects",
+    "crossing-offmesh-link-in-game-code"
+   ]
+  },
+  {
+   "id": "H36",
+   "q": "lamp makes a white blob on the wall",
+   "expected": [
+    "howto-lamp-falloff-night-exposure"
+   ]
+  },
+  {
+   "id": "H37",
+   "q": "redefinition error when I compile my new component",
+   "expected": [
+    "trap-unity-build-name-collision"
+   ]
+  },
+  {
+   "id": "H38",
+   "q": "NPC reacts to sounds it hears",
+   "expected": [
+    "audition-map-from-cpp",
+    "ai-perception-components",
+    "villager-player-reactions"
+   ]
+  },
+  {
+   "id": "H39",
+   "q": "villager feet slide on the ground",
+   "expected": [
+    "foot-slide-stance-probe",
+    "run-speed-match-root-motion",
+    "animation-speed-matching-negative"
+   ]
+  },
+  {
+   "id": "H40",
+   "q": "the night is as bright as the day",
+   "expected": [
+    "trap-bright-night-default-env",
+    "trap-editor-viewport-has-no-game-ambient-scaling",
+    "ashvale-atmosphere"
+   ]
+  },
+  {
+   "id": "H41",
+   "q": "how do I ship the shaders in the release build",
+   "expected": [
+    "howto-complete-shader-cache-seeded",
+    "packaging-release-config",
+    "project-shaders-gameshaders"
+   ]
+  },
+  {
+   "id": "H42",
+   "q": "is my behaviour tree file valid",
+   "expected": [
+    "tooling-bt-check-the-engine-loads-your-behaviour-tree",
+    "behavior-tree-component-entity"
+   ]
+  },
+  {
+   "id": "H43",
+   "q": "a fence the player can break",
+   "expected": [
+    "howto-jointed-breakable-brush-sword",
+    "gamesdk-props-destruction"
+   ]
+  },
+  {
+   "id": "H44",
+   "q": "give the player a sword to swing",
+   "expected": [
+    "ashvale-combat-feel",
+    "howto-held-item-first-person-placement",
+    "howto-jointed-breakable-brush-sword"
+   ]
+  },
+  {
+   "id": "H45",
+   "q": "colour grading and screen effects",
+   "expected": [
+    "learned-color-grading-charts-pipeline",
+    "ashvale-post-effects"
+   ]
+  },
+  {
+   "id": "H46",
+   "q": "voice for NPC lines, text to speech",
+   "expected": [
+    "fact-piper-offline-neural-tts-on-windows",
+    "playbook-dialogue-and-voice",
+    "trap-pitch-shift-overlap-add-destroys-synthetic-speech"
+   ]
+  },
+  {
+   "id": "H47",
+   "q": "enter a dungeon from the village",
+   "expected": [
+    "playbook-second-level-travel",
+    "playbook-build-sealed-interior"
+   ]
+  },
+  {
+   "id": "H48",
+   "q": "loading screen is black when the level changes",
+   "expected": [
+    "trap-level-change-black-screen-flashui-unload",
+    "howto-flashui-loading-page"
+   ]
+  },
+  {
+   "id": "H49",
+   "q": "connection refused the editor is not running",
+   "expected": [
+    "playbook-editor-recovery"
+   ]
+  },
+  {
+   "id": "H50",
+   "q": "I deleted files by mistake, how do I get them back",
+   "expected": [
+    "tooling-snapshot-tools-backup-of-the-work",
+    "trap-prune-by-timestamp-deleted-project-files"
+   ]
+  },
+  {
+   "id": "H51",
+   "q": "make a lower detail version of a mesh for distance",
+   "expected": [
+    "tooling-build-mesh-levels-of-detail-and-the-lod-path-trap",
+    "finding-the-engine-has-no-lod-generator-in-5-7-1"
+   ]
+  },
+  {
+   "id": "H52",
+   "q": "the player slides or stutters on slopes",
+   "expected": [
+    "player-slope-contact-measured",
+    "gamesdk-player-movement",
+    "npc-airborne-on-slopes",
+    "living-step-up-gap",
+    "my-project-physics-measured"
+   ]
+  }
+ ]
+}

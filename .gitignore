@@ -1,0 +1,79 @@
+# Python bytecode and tooling caches
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+env/
+
+# Per-user and per-machine state (written by the tools next to server.py)
+active_project.txt
+.cache/
+*.log
+*.prev
+safe_close_baseline.json
+suite_stamp.json
+ashvale_baseline.json
+uc_stand.json
+
+# Run output: jobs, CI runs, screenshots, tool output pages
+job_runs/
+ci_runs/
+visual_baseline/
+
+# Catalogs and scratch dumped from a running editor or engine (regenerate with the tools).
+# engine_data/ keeps only its .gitkeep; the dumps and the scratch folders the tools create live inside it.
+engine_data/*
+!engine_data/.gitkeep
+
+# Third-party binaries, models and generated media (obtain them yourself; see NOTICE.md)
+tts_piper/
+anim_sources/
+texture_src/
+motionbricks_clips.json
+
+# Local copies of Crytek documentation or crawls of it
+cryengine_docs_links.json
+docs_damaged_ids.txt
+cryengine_manual/
+
+# Knowledge-base backups, locks and temporary files (rag/corpus_lib.py)
+rag/backups/
+rag/.*.tmp
+rag/.corpus.lock
+rag/add_*.py
+
+# Legacy and scratch files from the original project
+server_cleaned.py
+editor_leakwatch.ps1
+claude_*.txt
+claude_*.bat
+claude_*.py
+/_shoot_*.bmp
+/*.bmp
+
+# Local study notes (never committed)
+/GAMESDK_*.md
+/PLAYER_GUIDE.md
+/LEVEL_CRAFT_GUIDE.md
+/HOMEBOUND_STUDY.md
+
+# Build output if the plugin is built inside this folder
+build/
+*.dll
+*.pdb
+*.obj
+
+# Editors and OS
+.vs/
+.vscode/
+.idea/
+Thumbs.db
+desktop.ini
+state/
+
+# generated from the running editor: python bridge/editor_api.py --capture
+editor_api.json

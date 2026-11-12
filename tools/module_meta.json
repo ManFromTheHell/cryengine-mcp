@@ -1,0 +1,2205 @@
+{
+ "ace_catalog.py": {
+  "category": "catalog-or-checker",
+  "deps": [],
+  "needs_editor": false,
+  "purpose": "Reads the project's Audio Controls Editor XML libraries and compares them with the StringToId(...) literals in the game's C++. Reports undefined triggers, missing samples, duplicates and unreferenced triggers.",
+  "status": "general"
+ },
+ "anim_check.py": {
+  "category": "catalog-or-checker",
+  "deps": [
+   "editor with ClaudeBridgePlugin"
+  ],
+  "needs_editor": true,
+  "purpose": "Asks the open editor (bridge.character.names) for a character's joints and animation names. Checks chrparams, blend spaces (.bspace) and animation events against them (A001-A008).",
+  "status": "general"
+ },
+ "anim_img.py": {
+  "category": "core-tool-module",
+  "deps": [],
+  "needs_editor": false,
+  "purpose": "Offline parser for the per-clip headers (CHUNK_GAHCAF_INFO) in a compiled Animations.img: duration, distance, speed and turn speed.",
+  "status": "general"
+ },
+ "anim_inventory.py": {
+  "category": "project-specific-ashvale",
+  "deps": [
+   "GameSDK sample project animations.pak from the CRYENGINE Launcher"
+  ],
+  "needs_editor": false,
+  "purpose": "Classifies every clip in the GameSDK animations.pak by category and by whether a villager could play it (weaponless, third person, not additive). Offers report, find and json commands.",
+  "status": "example / project-specific"
+ },
+ "anim_oneshot.py": {
+  "category": "authoring-tool",
+  "deps": [
+   "numpy",
+   "NVIDIA MotionBricks/Kimodo output"
+  ],
+  "needs_editor": false,
+  "purpose": "numpy helpers that cut one-shot and in-place-loop clips from retargeted motion: slice_pad, mirror_soma, pelvis_yaw, make_clip, make_inplace_loop and best_inplace_loop.",
+  "status": "general"
+ },
+ "anim_sample.py": {
+  "category": "core-tool-module",
+  "deps": [
+   "editor with ClaudeBridgePlugin"
+  ],
+  "needs_editor": true,
+  "purpose": "Calls bridge.character.samplepose to get the engine's own joint poses at normalized clip times. Summarises key joints, root speed and the lowest sole height.",
+  "status": "general"
+ },
+ "ashvale_ci.py": {
+  "category": "project-specific-ashvale",
+  "deps": [
+   "a running editor with the ashvale level",
+   "game DLL"
+  ],
+  "needs_editor": true,
+  "purpose": "Regression harness for Ashvale. Optionally rebuilds Game.dll, plays the story through the editor, counts watched log lines and compares them with ashvale_baseline.json.",
+  "status": "example / project-specific"
+ },
+ "ashvale_playtest.py": {
+  "category": "project-specific-ashvale",
+  "deps": [
+   "Ashvale Game.dll"
+  ],
+  "needs_editor": true,
+  "purpose": "Plays Ashvale through in editor game mode via ash_* console commands and verifies each story step from the game's log and screenshots. Prints CHECK|PASS|label lines.",
+  "status": "example / project-specific"
+ },
+ "asset_catalog.py": {
+  "category": "catalog-or-checker",
+  "deps": [],
+  "needs_editor": false,
+  "purpose": "Reads every .cryasset metadata XML under Assets: types, GUIDs, dependencies and reverse-dependency lookup, heaviest assets and metadata coverage.",
+  "status": "general"
+ },
+ "asset_lint.py": {
+  "category": "core-tool-module",
+  "deps": [
+   "anim_img/crypak/pakread (optional)",
+   "CRYENGINE Launcher engine and GameSDK sample installs"
+  ],
+  "needs_editor": false,
+  "purpose": "Offline linter (L001-L018) for the project's loose assets: cgf/mtl/texture/audio/level/adb references, DDS formats, LOD checks, shader-cache age, and a Neon Noir licence check.",
+  "status": "general"
+ },
+ "asset_meta.py": {
+  "category": "core-tool-module",
+  "deps": [
+   "Tools/rc/rc.exe and Tools/cryassets/rcjob_cryassets.xml from the engine install"
+  ],
+  "needs_editor": false,
+  "purpose": "Runs the engine's own RC cryassets job into a scratch targetroot and copies only the missing .cryasset files into Assets (dry run by default, --apply to write). Existing files are never overwritten.",
+  "status": "general"
+ },
+ "audio_report.py": {
+  "category": "core-tool-module",
+  "deps": [
+   "numpy",
+   "ffmpeg",
+   "ffprobe"
+  ],
+  "needs_editor": false,
+  "purpose": "Measures an audio file: duration, peak, RMS, LUFS, true peak, silence, loop seam, spectrum and stereo correlation. Reads through ffmpeg/ffprobe. Optional --voice analysis.",
+  "status": "general"
+ },
+ "bmp2png.py": {
+  "category": "authoring-tool",
+  "deps": [],
+  "needs_editor": false,
+  "purpose": "Converts 24/32-bit BMP screenshots to PNG with the stdlib only, with optional nearest-neighbour downscale, and prints mean luma and saturation.",
+  "status": "general"
+ },
+ "bmp_to_png.py": {
+  "category": "authoring-tool",
+  "deps": [],
+  "needs_editor": false,
+  "purpose": "Converts a BMP to PNG with the stdlib only.",
+  "status": "limited use"
+ },
+ "bridge_devloop.py": {
+  "category": "bridge-infrastructure",
+  "deps": [
+   "MSBuild (Visual Studio)",
+   "schtasks",
+   "tasklist",
+   "deploy and rollback .bat files kept next to the engine source (not in this repository; see docs/CLAUDE_BRIDGE_OPS.md)"
+  ],
+  "needs_editor": true,
+  "purpose": "Build, deploy and self-test loop for the ClaudeBridge plugin. Builds with MSBuild, then uses Task Scheduler tasks to close Sandbox, swap the DLL into the engine install and relaunch, and reloads a level.",
+  "status": "general"
+ },
+ "bridge_py.py": {
+  "category": "bridge-infrastructure",
+  "deps": [
+   "editor with ClaudeBridgePlugin on 127.0.0.1:37778"
+  ],
+  "needs_editor": true,
+  "purpose": "Runs a multi-line Python file inside Sandbox through bridge.execute_python.b64, and provides the shared send() with refused/timeout hints and watchdog-based auto-recovery.",
+  "status": "general"
+ },
+ "bridge_run.py": {
+  "category": "bridge-infrastructure",
+  "deps": [
+   "editor with ClaudeBridgePlugin"
+  ],
+  "needs_editor": true,
+  "purpose": "Runs a text file of bridge commands, one per line, with sleep lines and truncated output.",
+  "status": "general"
+ },
+ "bridge_selftest.py": {
+  "category": "test",
+  "deps": [
+   "editor with ClaudeBridgePlugin",
+   "Ashvale assets for several checks"
+  ],
+  "needs_editor": true,
+  "purpose": "Self-test of the ClaudeBridge plugin over TCP (about 120 checks: core, window, python, files, camera, terrain, objects, env, vegetation, DB, schematyc, particles, nav, mannequin, bt, uqs, character, material, flow, dialogs, cap...",
+  "status": "example / project-specific"
+ },
+ "bridge_shoot.py": {
+  "category": "core-tool-module",
+  "deps": [
+   "running Sandbox with ClaudeBridgePlugin on 127.0.0.1:37778"
+  ],
+  "needs_editor": true,
+  "purpose": "CLI that takes viewport screenshots through the bridge (look_at, park cursor, 2 warm-up captures, accept on saturation >= 8) from a 'path|eye|target[|min_sat]' list.",
+  "status": "general"
+ },
+ "bridge_watchdog.py": {
+  "category": "bridge-infrastructure",
+  "deps": [
+   "schtasks",
+   "tasklist",
+   "taskkill",
+   "powershell",
+   "Windows only"
+  ],
+  "needs_editor": false,
+  "purpose": "Task-Scheduler watchdog: relaunches a dead Sandbox or kills+relaunches a hung one (2 strikes), rewrites projects.json to the active project, reopens the last level; also recover() used by the server when the editor is gone.",
+  "status": "general"
+ },
+ "bt_check.py": {
+  "category": "catalog-or-checker",
+  "deps": [
+   "engine source tree (for node registry)",
+   "running editor"
+  ],
+  "needs_editor": true,
+  "purpose": "Loads behaviour trees through the editor's own BehaviorTreeManager (bridge.bt.load/nodes), diffs file vs engine, and cross-checks events and blackboard keys against the game's C++ literals.",
+  "status": "general"
+ },
+ "build_ashvale.py": {
+  "category": "project-specific-ashvale",
+  "deps": [
+   "numpy",
+   "engine_data/heights_ashvale.r32",
+   "GameSDK assets (Objects/props/..., Objects/natural/...)",
+   "game components CNpcComponent, CFarmGateComponent, CChestComponent etc. from the Ashvale C++"
+  ],
+  "needs_editor": true,
+  "purpose": "Builds the Ashvale level (houses, village, tower, NPCs, chests, items, trim, nav area, vegetation) by sending editor Python over the bridge; also exposes send/py/set_props/ground helpers used by many Ashvale scripts.",
+  "status": "example / project-specific"
+ },
+ "build_game.py": {
+  "category": "core-tool-module",
+  "deps": [
+   "cmake/MSVC toolchain"
+  ],
+  "needs_editor": false,
+  "purpose": "Runs game_build_locked.py (cmake build under a lock) for release/profile and folds the MSVC output into a verdict with first errors and counts.",
+  "status": "general"
+ },
+ "catalog_stamps.py": {
+  "category": "catalog-or-checker",
+  "deps": [
+   "installed ClaudeBridgePlugin.dll / Sandbox.exe"
+  ],
+  "needs_editor": false,
+  "purpose": "Records which plugin/Sandbox build produced each catalog dump (cvars.json, editor_commands.json, editor_api.json) and warns when a dump is stale.",
+  "status": "general"
+ },
+ "cgf_bounds.py": {
+  "category": "authoring-tool",
+  "deps": [],
+  "needs_editor": false,
+  "purpose": "Prints the bounding box of every mesh chunk and node names of a .cgf by parsing the CrCh 0x746 chunk table.",
+  "status": "general"
+ },
+ "character_check.py": {
+  "category": "catalog-or-checker",
+  "deps": [
+   "asset_lint.Names",
+   "running editor"
+  ],
+  "needs_editor": true,
+  "purpose": "Creates every .cdf through the engine (bridge.character.check) and compares skeleton/attachments/log with the file and with the game's C++ (codes C001-C007).",
+  "status": "general"
+ },
+ "character_collider.py": {
+  "category": "core-tool-module",
+  "deps": [],
+  "needs_editor": false,
+  "purpose": "Pure maths converting between CRYENGINE living-entity collider parameters (pe_player_dimensions) and CCharacterControllerComponent fields, with step-up height.",
+  "status": "general"
+ },
+ "cpp_conditions.py": {
+  "category": "core-tool-module",
+  "deps": [],
+  "needs_editor": false,
+  "purpose": "Three-valued mini C preprocessor that decides whether a source line is compiled into Release and Profile builds (used by cvar_catalog and shader_catalog).",
+  "status": "general"
+ },
+ "crypak.py": {
+  "category": "core-tool-module",
+  "deps": [],
+  "needs_editor": false,
+  "purpose": "Standard-library reader for CryPak .pak archives (list, grep, extract, cat) and read_asset (loose-then-packed lookup) used by many tools.",
+  "status": "general"
+ },
+ "cryproject_check.py": {
+  "category": "catalog-or-checker",
+  "deps": [
+   "C:\\ProgramData\\Crytek\\CRYENGINE\\cryengine.json"
+  ],
+  "needs_editor": false,
+  "purpose": "Validates Game.cryproject against the engine's project-manager rules (P001-P010) and optionally the live engine parse via bridge.project.info.",
+  "status": "general"
+ },
+ "cvar_catalog.py": {
+  "category": "catalog-or-checker",
+  "deps": [
+   "engine source tree for the scan",
+   "running editor for --capture"
+  ],
+  "needs_editor": true,
+  "purpose": "Builds the console-variable/command catalog by joining the editor's DumpCommandsVars/audit output with a source scan of registrations, Release/Profile conditions, settable() rules and sys_spec groups from engine.pak;",
+  "status": "general"
+ },
+ "cvar_probe.py": {
+  "category": "test",
+  "deps": [
+   "packaged game build with GameLauncher.exe",
+   "game-side bridge"
+  ],
+  "needs_editor": false,
+  "purpose": "Launches the packaged game, sets cvars through the game bridge and reports accepted/refused/absent versus the catalog's prediction; also probes command-line args and user.cfg/game.cfg handling.",
+  "status": "example / project-specific"
+ },
+ "debug_views.py": {
+  "category": "core-tool-module",
+  "deps": [
+   "numpy (shoot with min_saturation)",
+   "bridge_shoot.py, bmp_to_png.py, shot_compare.py, cvar_catalog.py, editor_window.py (sibling modules)",
+   "CRYENGINE install Editor/Scripts/*.py"
+  ],
+  "needs_editor": true,
+  "purpose": "Parses the engine's own Editor/Scripts viewmodes/environmentmodes/debug_views scripts into a catalog of debug views, applies one in the editor, takes a viewport picture (via bridge_shoot.py and bmp_to_png.py), crops it, and res...",
+  "status": "general"
+ },
+ "decal_lab.py": {
+  "category": "core-tool-module",
+  "deps": [
+   "numpy",
+   "debug_views, object_props, shot_compare, bridge_py (siblings)",
+   "GameSDK sample installed (Launcher asset)"
+  ],
+  "needs_editor": true,
+  "purpose": "Catalog of the GameSDK sample's 159 decal materials (read from the GameSDK paks), a rules check of a decal .mtl, and an editor-viewport preview of a Decal object with control pictures.",
+  "status": "general"
+ },
+ "docs_link_index.py": {
+  "category": "authoring-tool",
+  "deps": [
+   "a saved manual .html page from cryengine.com (Crytek content, supplied by you)"
+  ],
+  "needs_editor": false,
+  "purpose": "Builds a JSON link index (id, title, URL, breadcrumb) of the CRYENGINE V manual from one saved manual page's embedded navigation tree.",
+  "status": "general"
+ },
+ "docs_search.py": {
+  "category": "core-tool-module",
+  "deps": [
+   "offline manual .md files (Crytek copyrighted; not shipped, supply your own copy)"
+  ],
+  "needs_editor": false,
+  "purpose": "BM25-style search and index builder over an offline Markdown copy of the CRYENGINE V manual (chunks split at headings, one hit per page).",
+  "status": "general"
+ },
+ "door_crossing_test.py": {
+  "category": "project-specific-ashvale",
+  "deps": [
+   "packaged Ashvale GameLauncher.exe",
+   "Ashvale game code providing ash_* and claude_* commands",
+   "taskkill"
+  ],
+  "needs_editor": false,
+  "purpose": "Ashvale regression test: launches the packaged game (or editor game mode), sends villager Martha through a door off-mesh link into Cottage B and judges from the game log; also checks the stride matcher and 2D blend space.",
+  "status": "example / project-specific"
+ },
+ "drs_check.py": {
+  "category": "catalog-or-checker",
+  "deps": [
+   "ClaudeBridgePlugin verb bridge.drs.dump"
+  ],
+  "needs_editor": true,
+  "purpose": "Compares the Dynamic Response System as the running engine holds it (via bridge.drs.dump) with the project's .response and .dialog files and the game's C++ signal strings; findings D001-D008.",
+  "status": "general"
+ },
+ "editor_api.py": {
+  "category": "catalog-or-checker",
+  "deps": [
+   "editor_api.json (shipped data dump)",
+   "running editor for sweep"
+  ],
+  "needs_editor": false,
+  "purpose": "Searchable catalog of the Sandbox editor's Python API (from editor_api.json) with modal/dangerous/read-only flags, per-project call counts and sampled return values;",
+  "status": "general"
+ },
+ "editor_commands.py": {
+  "category": "catalog-or-checker",
+  "deps": [
+   "ClaudeBridgePlugin verb bridge.commands.dump"
+  ],
+  "needs_editor": true,
+  "purpose": "Catalog and search of everything ICommandManager holds (642 commands), captured from the open editor via bridge.commands.dump and cross-referenced with the Python API.",
+  "status": "general"
+ },
+ "editor_open.py": {
+  "category": "bridge-infrastructure",
+  "deps": [
+   "Sandbox.exe",
+   "tasklist",
+   "project_root.write_projects_json",
+   "bridge plugin on 127.0.0.1"
+  ],
+  "needs_editor": false,
+  "purpose": "Starts Sandbox if it is not running (after rewriting projects.json so the project opens without the Project Browser), waits for the bridge, opens a level via asset.edit and waits until the level name matches.",
+  "status": "general"
+ },
+ "editor_panel.py": {
+  "category": "authoring-tool",
+  "deps": [
+   "PySide2 and SandboxBridge (inside the editor's interpreter)",
+   "engine_data/*.json and job_runs/*.json written by sibling tools"
+  ],
+  "needs_editor": true,
+  "purpose": "A 'Claude Status' PySide2 pane registered inside Sandbox (Python 3.7, main thread) showing level, bridge plugin DLL, audit baseline, last editor-suite run and recent jobs; refreshes every 3 s.",
+  "status": "general"
+ },
+ "editor_state.py": {
+  "category": "bridge-infrastructure",
+  "deps": [
+   "ClaudeBridgePlugin bridge.execute_command / bridge.cvar_set"
+  ],
+  "needs_editor": true,
+  "purpose": "Puts the editor in a known state for automation: toggles ed_keepEditorActive and game mode and waits until game.is_in_game_mode reports the wanted state.",
+  "status": "general"
+ },
+ "editor_suite.py": {
+  "category": "core-tool-module",
+  "deps": [
+   "debug_views, render_tour",
+   "bridge_watchdog.py (Task-Scheduler watchdog)"
+  ],
+  "needs_editor": true,
+  "purpose": "Runs every test_*.py in the folder sequentially, checks object/dialog counts, about 60 rendering CVars, time of day and leftover zz_mcp_* files around each test, restores leaked state, writes engine_data/editor_suite.json;",
+  "status": "general"
+ },
+ "editor_ux.py": {
+  "category": "core-tool-module",
+  "deps": [
+   "plugin verbs bridge.undo.*, bridge.notify"
+  ],
+  "needs_editor": true,
+  "purpose": "Wrappers for the editor's undo stack (guarded undo with an 'expect' text), Notification Center messages and the Claude Status pane open/close.",
+  "status": "general"
+ },
+ "editor_window.py": {
+  "category": "bridge-infrastructure",
+  "deps": [
+   "ctypes.windll (Windows only)",
+   "PySide2 inside the editor"
+  ],
+  "needs_editor": true,
+  "purpose": "Finds the Sandbox window by title, reads or sets its size (SetWindowPos), and asks the editor's Qt where the Perspective 3D surface is, so picture tests can crop the viewport.",
+  "status": "general"
+ },
+ "engine_tests.py": {
+  "category": "core-tool-module",
+  "deps": [
+   "Launcher engine bin/win_x64/*UnitTest.exe",
+   "taskkill"
+  ],
+  "needs_editor": false,
+  "purpose": "Runs the engine's seven shipped GoogleTest executables (whitelisted names only) from a scratch folder, parses results and compares against a saved baseline.",
+  "status": "general"
+ },
+ "entity_check.py": {
+  "category": "catalog-or-checker",
+  "deps": [
+   "ClaudeBridgePlugin verb bridge.component.properties"
+  ],
+  "needs_editor": true,
+  "purpose": "Compares each Entity's component properties in the level's .lyr layers with the engine's live serialization (bridge.component.properties); N001-N006 findings.",
+  "status": "general"
+ },
+ "env_check.py": {
+  "category": "catalog-or-checker",
+  "deps": [
+   "CRYENGINE source tree (Code/CryEngine/CryCommon/Cry3DEngine/ITimeOfDay.h and Cry3DEngine/EnvironmentPreset.cpp)"
+  ],
+  "needs_editor": false,
+  "purpose": "Validates time-of-day (.env) presets against the engine's own variable table, which it parses out of the engine source (ITimeOfDay.h, EnvironmentPreset.cpp); also lists variables and diffs two presets.",
+  "status": "general"
+ },
+ "fbx_binary.py": {
+  "category": "core-tool-module",
+  "deps": [
+   "none (stdlib)"
+  ],
+  "needs_editor": false,
+  "purpose": "Standard-library reader/writer for binary FBX (node tree, arrays, zlib) plus add_proxy_skin, which binds the first mesh to one bone so RC accepts animation-only FBX files.",
+  "status": "general"
+ },
+ "fbx_root_motion.py": {
+  "category": "authoring-tool",
+  "deps": [],
+  "needs_editor": false,
+  "purpose": "Offline root-motion measurement of a locomotion FBX (turn degrees, speed, chord speed of Locator_Locomotion in world space) by composing the node chain per frame.",
+  "status": "general"
+ },
+ "fbx_to_caf.py": {
+  "category": "authoring-tool",
+  "deps": [
+   "Launcher Tools/rc/rc.exe"
+  ],
+  "needs_editor": false,
+  "purpose": "Converts an animation-only FBX to a .caf through rc.exe: adds a proxy skin, writes a flat import-request JSON, runs RC, copies the result out.",
+  "status": "general"
+ },
+ "final_packages.py": {
+  "category": "project-specific-ashvale",
+  "deps": [
+   "preflight, package_clean, package_symbols, release_manifest, safe_close, build_game, package_project.py (siblings, not read)",
+   "Ashvale test scripts (shader_tour, release_playthrough, ui_screens ...)",
+   "a local folder with shader paks (under MOTIONBRICKS_ROOT)",
+   "taskkill/tasklist"
+  ],
+  "needs_editor": true,
+  "purpose": "Release gate: closes Sandbox safely, runs preflight, packages with Crytek's packager into a versioned folder next to the project, installs shader paks, runs stale-group tests, writes RELEASE_OK.json;",
+  "status": "example / project-specific"
+ },
+ "flow_check.py": {
+  "category": "catalog-or-checker",
+  "deps": [
+   "ClaudeBridgePlugin verbs bridge.flow.catalog / bridge.flow.check"
+  ],
+  "needs_editor": true,
+  "purpose": "Catalogs the engine's 642 flow node types from the editor (bridge.flow.catalog) and loads graph XML through the engine's loader (bridge.flow.check), comparing with the file and the game's REGISTER_FLOW_NODE lines; F001-F009.",
+  "status": "general"
+ },
+ "flow_graph.py": {
+  "category": "authoring-tool",
+  "deps": [
+   "open editor"
+  ],
+  "needs_editor": true,
+  "purpose": "Builds a flow graph from a JSON-friendly spec, checks it with the engine loader through a throw-away file, then stores it as the FlowGraph child of a FlowgraphEntity in the open level.",
+  "status": "general"
+ },
+ "frame_profile.py": {
+  "category": "core-tool-module",
+  "deps": [
+   "running Sandbox with the bridge plugin"
+  ],
+  "needs_editor": true,
+  "purpose": "Records N frames with the engine's boot profiler (sys_bp_frames) on the open editor, parses bp_frames.xml and reports main-thread cost, log spam, hitches and render-thread waits; includes a compare() with a noise control.",
+  "status": "general"
+ },
+ "game_build_locked.py": {
+  "category": "bridge-infrastructure",
+  "deps": [
+   "cmake.exe",
+   "MSVC toolchain",
+   "a CMake solution in <project>/solutions/win64"
+  ],
+  "needs_editor": false,
+  "purpose": "Runs cmake --build for the Game target (Release or Profile) under a directory lock so two builds never write the same output, prints MSVC errors and returns a verdict code.",
+  "status": "general"
+ },
+ "gamedata_study.py": {
+  "category": "catalog-or-checker",
+  "deps": [],
+  "needs_editor": false,
+  "purpose": "Offline study of a CRYENGINE project's data libraries (items, vehicles, MaterialEffects, surfaces, archetypes, particles, UI, game modes, input, difficulty, prefabs, locale, Lua entity default properties) from loose files and p...",
+  "status": "general"
+ },
+ "gameplay_test.py": {
+  "category": "project-specific-ashvale",
+  "deps": [
+   "packaged Ashvale build with GameLauncher.exe",
+   "taskkill"
+  ],
+  "needs_editor": false,
+  "purpose": "Console-driven regression test of Ashvale's economy (Oswin, Martha) and bandit archers on a packaged build, with a static check of dialogue.xml against claude_voice.xml and OGG files.",
+  "status": "example / project-specific"
+ },
+ "gamesdk_audio.py": {
+  "category": "catalog-or-checker",
+  "deps": [
+   "GameSDK sample project installed via the CRYENGINE Launcher"
+  ],
+  "needs_editor": false,
+  "purpose": "Builds and searches a catalog of the GameSDK sample's SDL-mixer audio triggers from its audio.pak (real sample vs do_nothing.ogg placeholder), cross-checked against the project's own libraries.",
+  "status": "general"
+ },
+ "gametoken_check.py": {
+  "category": "catalog-or-checker",
+  "deps": [],
+  "needs_editor": false,
+  "purpose": "Checks a level's GameTokens libraries (loose folder and the copy inside level.pak) by the engine loader's rules and finds token references in layers and DRS files that no library defines.",
+  "status": "general"
+ },
+ "grading_chart.py": {
+  "category": "authoring-tool",
+  "deps": [
+   "numpy"
+  ],
+  "needs_editor": false,
+  "purpose": "Makes a colour-grading lookup chart (_cch.dds) by reading the engine's identity chart from engine.pak and applying saturation/tint/gamma/lift.",
+  "status": "general"
+ },
+ "health.py": {
+  "category": "bridge-infrastructure",
+  "deps": [
+   "powershell Get-ScheduledTaskInfo",
+   "tasklist"
+  ],
+  "needs_editor": false,
+  "purpose": "One report of whether the working state can be trusted: editor and bridge, watchdog scheduled task and lock, package freshness, shader cache, jobs, disk, MCP server staleness, catalog stamps; also wait_for_editor.",
+  "status": "general"
+ },
+ "import_gamesdk_asset.py": {
+  "category": "authoring-tool",
+  "deps": [
+   "GameSDK sample project installed via the Launcher"
+  ],
+  "needs_editor": false,
+  "purpose": "Copies GameSDK models, materials and every texture (including split mip files) from the sample project's paks into the project's Assets.",
+  "status": "general"
+ },
+ "job_selftest.py": {
+  "category": "test",
+  "deps": [],
+  "needs_editor": false,
+  "purpose": "A harmless few-second job that prints ticks and exits with a given code, to prove the job machinery.",
+  "status": "general"
+ },
+ "jobs.py": {
+  "category": "bridge-infrastructure",
+  "deps": [
+   "tasklist",
+   "taskkill",
+   "Piper (voices)",
+   "Windows only (DETACHED flags, taskkill)"
+  ],
+  "needs_editor": false,
+  "purpose": "Detached long-running job runner (start/status/log/stop) over a fixed whitelist of KINDS (tests, package, build_game, shader_cache, shoot, visual, cvar_probe, ci, editor_suite, voices, music, textures, selftest) with validated ...",
+  "status": "general"
+ },
+ "kimodo_clips.py": {
+  "category": "project-specific-ashvale",
+  "deps": [
+   "numpy",
+   "rc.exe",
+   "a local NVIDIA Kimodo install (work folders from MOTIONBRICKS_ROOT, MOTIONBRICKS_WORK, KIMODO_OUT)",
+   "anim_sources/kimodo/*.npz"
+  ],
+  "needs_editor": false,
+  "purpose": "Retargets chosen NVIDIA Kimodo motions onto the villagers' Bip01 rig, cuts them (peak/range/turn/loop/walk), builds Crytek FBX and compiles .caf with rc.exe, writing motionbricks_clips.json;",
+  "status": "example / project-specific"
+ },
+ "kimodo_retarget.py": {
+  "category": "authoring-tool",
+  "deps": [
+   "numpy",
+   "sdk_player_bindpose.json",
+   "soma77_skeleton.json"
+  ],
+  "needs_editor": false,
+  "purpose": "Retargets Kimodo SOMA-77 skeleton motion onto the Bip01 villager rig (limb directions, hinges, pelvis/torso/head frame transfer, palm frames, ground contact) and saves an npz.",
+  "status": "limited use"
+ },
+ "knowledge_eval.py": {
+  "category": "test",
+  "deps": [
+   "rag/rag_query.py",
+   "rag/cryengine_project_rag.jsonl",
+   "knowledge_holdout.json",
+   "knowledge_dev.json"
+  ],
+  "needs_editor": false,
+  "purpose": "Grades query_knowledge/rag_query against question files with expected chunk ids (rank-1, top-3, top-5, MRR), treating null expected as a corpus gap.",
+  "status": "general"
+ },
+ "layer_probe.py": {
+  "category": "authoring-tool",
+  "deps": [],
+  "needs_editor": false,
+  "purpose": "Dumps example objects (shortened XML) out of a level's .lyr layer files by type, class, layer or name, or prints a per-layer type summary.",
+  "status": "general"
+ },
+ "level_check.py": {
+  "category": "catalog-or-checker",
+  "deps": [],
+  "needs_editor": false,
+  "purpose": "Checks a level's environment.xml, timeofday.xml preset list and exported level.pak (mission XML, presets, entity drift) against the 3D engine loader's contract (V001-V009).",
+  "status": "general"
+ },
+ "level_inventory.py": {
+  "category": "core-tool-module",
+  "deps": [],
+  "needs_editor": false,
+  "purpose": "Offline inventory of a CRYENGINE level: reads layers/*.lyr and level.pak (via crypak), lists object types, AI characters (archetype GUIDs resolved through Libs/EntityArchetypes), nav areas, seed points, smart objects and baked ...",
+  "status": "general"
+ },
+ "level_stats.py": {
+  "category": "core-tool-module",
+  "deps": [],
+  "needs_editor": true,
+  "purpose": "Runs the editor command level.save_stats, parses the engine's SpreadsheetML workbooks (Excel XML with undeclared prefixes) into tables, reports heaviest textures/geometry/physics-proxy overruns, and wraps level.validate warning...",
+  "status": "general"
+ },
+ "level_study.py": {
+  "category": "core-tool-module",
+  "deps": [],
+  "needs_editor": false,
+  "purpose": "Explains how a finished level is built, section by section (overview, layer streaming, audio, borders, terrain, lighting incl. time-of-day preset evaluation, cinematics, flowgraph logic), reading .lyr/leveldata/level.pak offline.",
+  "status": "general"
+ },
+ "light_cookie.py": {
+  "category": "authoring-tool",
+  "deps": [
+   "numpy",
+   "Crytek rc.exe"
+  ],
+  "needs_editor": false,
+  "purpose": "Builds a 512x512 window-shaped projector-light cookie, embeds the LightProjector RC preset in the TIFF and compiles it to DDS with Crytek rc.exe, copies it into Assets/textures/lights.",
+  "status": "general"
+ },
+ "loading_screen_test.py": {
+  "category": "test",
+  "deps": [
+   "packaged game build",
+   "Windows taskkill, SetWindowPos"
+  ],
+  "needs_editor": false,
+  "purpose": "Launches the packaged game windowed, screen-grabs frames from window creation to menu build, and checks from pixels and the game's trace log that the loader page shows during the level load and is gone before the menu.",
+  "status": "example / project-specific"
+ },
+ "make_heightmap.py": {
+  "category": "authoring-tool",
+  "deps": [
+   "numpy"
+  ],
+  "needs_editor": false,
+  "purpose": "Procedural 1024x1024 float32 heightmap (ridged multifractal, domain warping, droplet erosion in numpy batches, authored mountain range + lake basin).",
+  "status": "general"
+ },
+ "make_music.py": {
+  "category": "authoring-tool",
+  "deps": [
+   "numpy",
+   "ffmpeg on PATH (libvorbis)"
+  ],
+  "needs_editor": false,
+  "purpose": "Numpy-synthesised medieval music (Karplus-Strong lute, flute, drone, bodhran-like drum, circular reverb) rendering six seamless ~2 min loops to OGG via ffmpeg and writing the claude_music.xml audio-library file.",
+  "status": "general"
+ },
+ "make_sounds.py": {
+  "category": "authoring-tool",
+  "deps": [
+   "numpy",
+   "ffmpeg on PATH"
+  ],
+  "needs_editor": false,
+  "purpose": "Synthesises seamless ambience loops (rain, crickets, wind) with numpy, writes WAV then encodes to OGG with ffmpeg and deletes the WAV; provides band/norm/write_wav/to_ogg helpers reused by make_sfx and make_weapon_sounds.",
+  "status": "general"
+ },
+ "make_voices.py": {
+  "category": "project-specific-ashvale",
+  "deps": [
+   "numpy",
+   "ffmpeg on PATH",
+   "tts_piper/piper/piper.exe + en_GB-*.onnx models (downloaded)",
+   "Windows PowerShell + System.Speech (tts_render.ps1) for --sapi"
+  ],
+  "needs_editor": false,
+  "purpose": "Renders every NPC line of libs/ashvale/dialogue.xml to OGG with offline Piper (or Windows SAPI via tts_render.ps1), per-character voice/pitch shaping, quality control against voiced-frame loss, and writes claude_voice.xml.",
+  "status": "example / project-specific"
+ },
+ "mannequin_check.py": {
+  "category": "catalog-or-checker",
+  "deps": [
+   "engine_data/mannequin_clips.json cache (machine-generated)"
+  ],
+  "needs_editor": true,
+  "purpose": "Loads a Mannequin animation database/controller definition/character through the engine (bridge.mannequin.check), diffs the files with what the loader kept, counts Validate callbacks, applies the manual's scope/FragmentDefs rul...",
+  "status": "general"
+ },
+ "manual.py": {
+  "category": "core-tool-module",
+  "deps": [
+   "the manual corpus (not part of the repo)"
+  ],
+  "needs_editor": false,
+  "purpose": "Offline CRYENGINE manual access for MCP tools: BM25 search over a pre-built index, page reading by id/title/heading with paging, table of contents, CVar/class identifier extraction.",
+  "status": "general"
+ },
+ "material_check.py": {
+  "category": "catalog-or-checker",
+  "deps": [],
+  "needs_editor": true,
+  "purpose": "Loads each .mtl through the engine's material manager (bridge.material.check) and compares with the file: surface type, shader, generation-mask flags, texture binding, missing textures, UI-element materials, engine log lines;",
+  "status": "general"
+ },
+ "materialfx.py": {
+  "category": "project-specific-ashvale",
+  "deps": [
+   "Ashvale outputs of make_sfx.py (claude_sfx.xml) and make_blood_assets.py (ashfx particle library)"
+  ],
+  "needs_editor": false,
+  "purpose": "Writes and checks the game's surface-to-impact table: Assets/libs/materialeffects/materialeffects.xml (SpreadsheetML) and fxlibs/ashvale_impact.xml, and predicts what CMaterialEffects::LoadSpreadSheet/LoadFXLibrary will resolve.",
+  "status": "example / project-specific"
+ },
+ "mesh_fbx.py": {
+  "category": "core-tool-module",
+  "deps": [
+   "rc.exe (CRYENGINE Resource Compiler)"
+  ],
+  "needs_editor": false,
+  "purpose": "Builds procedural polygon meshes in Python, writes a binary FBX with fbx_binary.py and runs rc.exe to produce a .cgf (used by pipeline.build_mesh / the build_mesh tool).",
+  "status": "general"
+ },
+ "motionbricks_actions.py": {
+  "category": "project-specific-ashvale",
+  "deps": [
+   "numpy",
+   "anim_oneshot.py, motionbricks_clip/fbx/retarget",
+   "NVIDIA MotionBricks recordings (the MOTIONBRICKS_ROOT folder)",
+   "rc.exe via fbx_to_caf"
+  ],
+  "needs_editor": false,
+  "purpose": "Cuts START, STOP and IDLE clips for the villagers out of recorded MotionBricks scenarios, retargets them to Bip01 and compiles .caf files with a manifest entry.",
+  "status": "example / project-specific"
+ },
+ "motionbricks_clip.py": {
+  "category": "authoring-tool",
+  "deps": [
+   "numpy",
+   "motionbricks_fbx/loop/retarget",
+   "Crytek Crysis animation assets FBX from the Launcher",
+   "NVIDIA MotionBricks recordings and a sdk_player bind pose JSON"
+  ],
+  "needs_editor": false,
+  "purpose": "One-command pipeline from a recorded MotionBricks style to a looping .caf: retarget G1 to Bip01, find a seamless cycle, write curves into a copy of a Crytek locomotion FBX, compile with rc.exe and save an expected.json for vali...",
+  "status": "general"
+ },
+ "motionbricks_fbx.py": {
+  "category": "authoring-tool",
+  "deps": [
+   "numpy",
+   "fbx_binary.py, fbx_root_motion.py",
+   "a Crytek animation FBX template"
+  ],
+  "needs_editor": false,
+  "purpose": "Rewrites animation curves inside a copy of a Crytek Bip01 animation FBX (axis conversion, Euler conversion, take-span fixes) so rc.exe compiles it to a .caf.",
+  "status": "general"
+ },
+ "motionbricks_loop.py": {
+  "category": "authoring-tool",
+  "deps": [
+   "numpy"
+  ],
+  "needs_editor": false,
+  "purpose": "Finds and builds a seamless walking cycle (pose-feature matching, crossfaded seam, straight-line locator) from a retargeted MotionBricks clip.",
+  "status": "general"
+ },
+ "motionbricks_preview.py": {
+  "category": "authoring-tool",
+  "deps": [
+   "numpy"
+  ],
+  "needs_editor": false,
+  "purpose": "Draws stick-figure contact sheets (PNG) of recorded or retargeted MotionBricks motion and of engine samplepose JSON output.",
+  "status": "general"
+ },
+ "motionbricks_record.py": {
+  "category": "authoring-tool",
+  "deps": [
+   "torch (AMD ROCm build mentioned), numpy, the MotionBricks repo and checkpoint",
+   "a local MotionBricks Python environment (under MOTIONBRICKS_ROOT)"
+  ],
+  "needs_editor": false,
+  "purpose": "Runs NVIDIA MotionBricks headless in its own venv and records a style's motion (qpos, joint positions and rotations) to .npz.",
+  "status": "general"
+ },
+ "motionbricks_retarget.py": {
+  "category": "authoring-tool",
+  "deps": [
+   "numpy",
+   "a bind pose JSON produced by the editor bridge (bridge.character.bindpose)"
+  ],
+  "needs_editor": false,
+  "purpose": "Retargets the Unitree G1 skeleton motion from MotionBricks onto the Bip01 human rig (limb swing, hinge constraint solver, pelvis/torso frames, foot grounding).",
+  "status": "general"
+ },
+ "motionbricks_scenario.py": {
+  "category": "authoring-tool",
+  "deps": [
+   "torch + MotionBricks repo (via motionbricks_record)",
+   "numpy"
+  ],
+  "needs_editor": false,
+  "purpose": "Records scripted MotionBricks scenarios (start, stop, turn-on-the-spot, idle) headless in the MotionBricks venv.",
+  "status": "general"
+ },
+ "motionbricks_validate.py": {
+  "category": "catalog-or-checker",
+  "deps": [
+   "numpy",
+   "engine samplepose JSON (needs the editor to produce)"
+  ],
+  "needs_editor": false,
+  "purpose": "Compares the engine's samplepose output for a compiled clip with the expected.json written when the clip was built; exit code 1 when any joint is off by more than the tolerance.",
+  "status": "general"
+ },
+ "nav_check.py": {
+  "category": "catalog-or-checker",
+  "deps": [
+   "running Sandbox with ClaudeBridgePlugin"
+  ],
+  "needs_editor": true,
+  "purpose": "Asks the engine's navigation system (bridge.nav.query) connectivity questions: agent types, point-to-point reachability and an ASCII reachability map.",
+  "status": "general"
+ },
+ "night_test.py": {
+  "category": "test",
+  "deps": [
+   "packaged Ashvale build with GameLauncher.exe, game bridge on 127.0.0.1:37777"
+  ],
+  "needs_editor": false,
+  "purpose": "Playable-night test of a packaged Ashvale build: clock rate, lamp state at noon/21:00, night screenshots with luminance stats and a contact sheet, campfire, and villagers going home at dusk.",
+  "status": "example / project-specific"
+ },
+ "object_catalog.py": {
+  "category": "catalog-or-checker",
+  "deps": [
+   "running Sandbox"
+  ],
+  "needs_editor": true,
+  "purpose": "Creates one scratch object of each editor object type, reads back its serialized XML properties, deletes it, and saves engine_data/object_catalog.json; also searches the catalog.",
+  "status": "general"
+ },
+ "object_check.py": {
+  "category": "catalog-or-checker",
+  "deps": [
+   "object_props.py, open_level.py",
+   "running Sandbox"
+  ],
+  "needs_editor": true,
+  "purpose": "Compares a level's non-entity objects in the .lyr layer files with the live editor objects serialized through bridge.object.xml (codes O001-O007).",
+  "status": "general"
+ },
+ "object_props.py": {
+  "category": "core-tool-module",
+  "deps": [
+   "running Sandbox"
+  ],
+  "needs_editor": true,
+  "purpose": "Reads and sets any editor object's properties through bridge.object.xml / bridge.object.set, computes Bezier spline points like the editor, creates objects with validation, and provides a scratch() context manager.",
+  "status": "general"
+ },
+ "objects.py": {
+  "category": "core-tool-module",
+  "deps": [
+   "running Sandbox"
+  ],
+  "needs_editor": true,
+  "purpose": "Place and delete level objects with pre-checks (mesh/material exist, name free, sane numbers) and read-back; delete is a dry run until 'really' equals the match count.",
+  "status": "general"
+ },
+ "open_level.py": {
+  "category": "core-tool-module",
+  "deps": [],
+  "needs_editor": false,
+  "purpose": "Returns the folder name of the level the open editor holds, falling back to 'ashvale'.",
+  "status": "general"
+ },
+ "package_clean.py": {
+  "category": "core-tool-module",
+  "deps": [
+   "package_allowlist.json",
+   "a packaged build directory"
+  ],
+  "needs_editor": false,
+  "purpose": "Plans, applies and audits removal of unneeded engine binaries from a package's bin folders using PE import-table dependency walks and a package_allowlist.json.",
+  "status": "general"
+ },
+ "package_features_test.py": {
+  "category": "test",
+  "deps": [
+   "packaged Ashvale build, game bridge on 127.0.0.1:37777"
+  ],
+  "needs_editor": false,
+  "purpose": "Playtests a packaged Ashvale build: the breakable fence at fixed coordinates, control with impulse 0, then impulse 80, via the game bridge.",
+  "status": "example / project-specific"
+ },
+ "package_project.py": {
+  "category": "core-tool-module",
+  "deps": [
+   "engine Tools/CryVersionSelector (release_project, release_project_gui)",
+   "rc.exe spawned by the packager"
+  ],
+  "needs_editor": false,
+  "purpose": "Runs CRYENGINE's own release_project packager unattended by answering its Tk dialog and input() in code.",
+  "status": "general"
+ },
+ "package_symbols.py": {
+  "category": "core-tool-module",
+  "deps": [
+   "none beyond stdlib"
+  ],
+  "needs_editor": false,
+  "purpose": "Matches PDBs to binaries by CodeView GUID/age, archives Game.dll plus matching PDBs beside a package and writes modules.json.",
+  "status": "general"
+ },
+ "pak_textures.py": {
+  "category": "core-tool-module",
+  "deps": [
+   "engine Tools/7za.exe"
+  ],
+  "needs_editor": false,
+  "purpose": "Adds textures a package is missing (split .dds sets the stock packager skips) to Assets/GameSDKTextures.pak with the engine's 7za.",
+  "status": "general"
+ },
+ "pakread.py": {
+  "category": "core-tool-module",
+  "deps": [
+   "none (stdlib)"
+  ],
+  "needs_editor": false,
+  "purpose": "Reads one file out of a CRYENGINE .pak (ZIP with backslash local headers) by parsing the local header by hand; read-only.",
+  "status": "general"
+ },
+ "particle_catalog.py": {
+  "category": "catalog-or-checker",
+  "deps": [
+   "crypak.py, bridge_py.py",
+   "running Sandbox (capture and --check)",
+   "CRYENGINE source tree for legacy/modifier names (capture only)"
+  ],
+  "needs_editor": true,
+  "purpose": "Catalogs the engine's pfx2 particle features and modifiers (captured from the editor's registry), searches them, and validates a .pfx by round-tripping it through the engine's own loader.",
+  "status": "general"
+ },
+ "pbs_check.py": {
+  "category": "catalog-or-checker",
+  "deps": [
+   "none (stdlib)"
+  ],
+  "needs_editor": false,
+  "purpose": "Checks .mtl materials against the manual's PBS rules (S001-S007: albedo > 1, specular range, metal rules, coloured specular, Shininess scaling).",
+  "status": "general"
+ },
+ "pe_imports.py": {
+  "category": "authoring-tool",
+  "deps": [],
+  "needs_editor": false,
+  "purpose": "Stdlib-only PE parser listing a DLL/EXE's imports per DLL and its exports, used to see whether the bridge plugin depends on a locally rebuilt Sandbox.exe.",
+  "status": "general"
+ },
+ "perf_tour.py": {
+  "category": "project-specific-ashvale",
+  "deps": [
+   "GameLauncher.exe of a packaged Ashvale build",
+   "taskkill",
+   "Statoscope (Profile builds)"
+  ],
+  "needs_editor": false,
+  "purpose": "Launches a packaged Ashvale build, drives it via the game bridge (port 37777) through 17 named stops (village, tavern, bridge, camp, fight, rain, cutscene) and records frame time/Statoscope data, with a Release perf budget gate.",
+  "status": "example / project-specific"
+ },
+ "pfx_author.py": {
+  "category": "authoring-tool",
+  "deps": [
+   "numpy (preview only)",
+   "open Sandbox editor with ClaudeBridgePlugin"
+  ],
+  "needs_editor": true,
+  "purpose": "Composes .pfx particle effects from a plain description using the engine's own feature catalog (unknown feature/param refused), writes them under Assets/Particles, verifies via the engine loader, and previews them in the editor...",
+  "status": "general"
+ },
+ "pickup_test.py": {
+  "category": "test",
+  "deps": [
+   "packaged Ashvale build",
+   "taskkill"
+  ],
+  "needs_editor": false,
+  "purpose": "Packaged-game test of bread/coin pickups (take with E, save/load, new game restores) driven over the game bridge with frame-diff controls.",
+  "status": "example / project-specific"
+ },
+ "pipeline.py": {
+  "category": "core-tool-module",
+  "deps": [
+   "rc.exe (via mesh_fbx/texture_lab/jobs)",
+   "Piper (tts_piper/piper/piper.exe, optional)"
+  ],
+  "needs_editor": false,
+  "purpose": "Asset-pipeline functions wrapped by the MCP server: procedural texture via texture_lab+rc.exe, .mtl writer (incl.",
+  "status": "general"
+ },
+ "preflight.py": {
+  "category": "core-tool-module",
+  "deps": [
+   "level_check, safe_close, package_clean modules",
+   "Crytek RC log file",
+   "preflight_exempt.json (optional)"
+  ],
+  "needs_editor": false,
+  "purpose": "The single list of pre-package and post-package checks (malformed XML assets, WAV audio the packager drops, pre-split DDS outside paks, per-level level_check, scratch objects saved in layers, stale sources vs Game.dll, RC log f...",
+  "status": "general"
+ },
+ "project_audit.py": {
+  "category": "catalog-or-checker",
+  "deps": [
+   "all *_check modules",
+   "open editor for 15 of 22 validators",
+   "engine unit-test executables via engine_tests"
+  ],
+  "needs_editor": true,
+  "purpose": "Runs ~22 engine-owned validators (asset lint, material/character/mannequin/BT/UQS/flow/DRS/env/anim/UI/level/object/entity checks, engine unit tests, particles, sequences) in turn, normalises findings, and diffs against an acce...",
+  "status": "general"
+ },
+ "project_inventory.py": {
+  "category": "catalog-or-checker",
+  "deps": [],
+  "needs_editor": false,
+  "purpose": "Maps what a project ships: per-pak sizes, content areas (levels, scripts, particles, materials, UI...), packed/loose folder breakdown, regex file listing, using crypak.",
+  "status": "general"
+ },
+ "project_root.py": {
+  "category": "bridge-infrastructure",
+  "deps": [
+   "Windows %PROGRAMDATA%\\Crytek\\CRYENGINE\\projects.json"
+  ],
+  "needs_editor": false,
+  "purpose": "Single place deciding the active project: env CRYENGINE_PROJECT, then active_project.txt in the repository root, else the parent folder of the repository; also reads/writes the engine's projects.json to make a project the editor's startup project.",
+  "status": "general"
+ },
+ "prune_imports.py": {
+  "category": "one-off-patch-or-migration",
+  "deps": [
+   "a snapshot taken BEFORE imports"
+  ],
+  "needs_editor": false,
+  "purpose": "Deletes files copied into Assets for previewing (textures, generic/terrain/decal materials, natural/architecture objects) that were not in a given snapshot and are not named by any kept material;",
+  "status": "one-off"
+ },
+ "rc_catalog.py": {
+  "category": "catalog-or-checker",
+  "deps": [
+   "rc.exe and rc.ini of the installed engine"
+  ],
+  "needs_editor": false,
+  "purpose": "Reads Tools/rc/rc.ini presets and parses `rc.exe /help` into a catalog of RC options and converters; finds which presets match a file name; caches options in engine_data/rc_options.json.",
+  "status": "general"
+ },
+ "rebuild_game.py": {
+  "category": "core-tool-module",
+  "deps": [],
+  "needs_editor": false,
+  "purpose": "Thin CLI that compiles Game.dll (profile/release) through build_game.build and prints 'build ok' only when compile and link succeeded; never touches the editor.",
+  "status": "general"
+ },
+ "release_manifest.py": {
+  "category": "core-tool-module",
+  "deps": [
+   "Windows only (ctypes.windll, cmd /c mklink /J)"
+  ],
+  "needs_editor": false,
+  "purpose": "Versioned package folders (Ashvale_<date>_<hash8>), SHA-256 package hash, version stamp, RELEASE_OK.json, promotion via directory junction with legacy rename, and a guarded prune.",
+  "status": "general"
+ },
+ "release_playthrough.py": {
+  "category": "test",
+  "deps": [
+   "PowerShell Get-WinEvent",
+   "packaged Ashvale build"
+  ],
+  "needs_editor": false,
+  "purpose": "Plays a packaged Release Ashvale build from menu to ending to Quit over the game bridge and checks story flags, saves/loads, shader-cache misses, and Windows crash reports.",
+  "status": "example / project-specific"
+ },
+ "render_tour.py": {
+  "category": "authoring-tool",
+  "deps": [
+   "cvar_catalog, debug_views, shot_compare (numpy)",
+   "open editor"
+  ],
+  "needs_editor": true,
+  "purpose": "Toggles one rendering CVar at a time in the editor viewport, shoots against fresh controls, reports mean abs diff vs noise/drift, restores and reads back each variable.",
+  "status": "general"
+ },
+ "run_detached.py": {
+  "category": "other",
+  "deps": [
+   "Windows creationflags 0x8|0x200"
+  ],
+  "needs_editor": false,
+  "purpose": "Starts a Python script detached from the shell (DETACHED_PROCESS|CREATE_NEW_PROCESS_GROUP) with stdout/stderr to a log file, because background commands are killed after 10 minutes.",
+  "status": "general"
+ },
+ "safe_close.py": {
+  "category": "bridge-infrastructure",
+  "deps": [
+   "TCP 127.0.0.1:37778 bridge",
+   "tasklist/taskkill"
+  ],
+  "needs_editor": true,
+  "purpose": "The one safe way to close the editor: inspects the open level, refuses with scratch objects or unexplained object-count drift, snapshots, saves, closes (answering dialogs), kills only after a verified save, and writes the 'clos...",
+  "status": "general"
+ },
+ "schematyc_catalog.py": {
+  "category": "catalog-or-checker",
+  "deps": [
+   "open editor for --capture only"
+  ],
+  "needs_editor": false,
+  "purpose": "Captures the editor's Schematyc environment registry (components, functions, signals, data types) to engine_data/schematyc_env.json via bridge.schematyc.dump and provides search/get/summary over it.",
+  "status": "general"
+ },
+ "scrape_cryengine_docs.py": {
+  "category": "authoring-tool",
+  "deps": [
+   "network access to the CRYENGINE docs site (urllib)",
+   "cryengine_docs_links.json produced by docs_link_index.py"
+  ],
+  "needs_editor": false,
+  "purpose": "Downloads the CRYENGINE V online manual page by page (URLs from a link index built by docs_link_index.py), converts article HTML to markdown with regexes, writes per-section .md files plus manifest.json; resumable.",
+  "status": "general"
+ },
+ "sequence_check.py": {
+  "category": "catalog-or-checker",
+  "deps": [
+   "ClaudeBridgePlugin verb bridge.sequence.roundtrip"
+  ],
+  "needs_editor": true,
+  "purpose": "Round-trips a Track View sequence XML through the editor (verb bridge.sequence.roundtrip: engine LoadSequence then Serialize) and diffs the input against the engine's saved copy to show which nodes/tracks/keys/attributes the en...",
+  "status": "general"
+ },
+ "server_support.py": {
+  "category": "core-tool-module",
+  "deps": [
+   "FastMCP private API mcp._tool_manager"
+  ],
+  "needs_editor": false,
+  "purpose": "Offline-testable support for server.py: bounded tool output (large results saved to job_runs/out and paged by read_output), threading of blocking tools, editor-relaunch report, danger deny-list for python/editor/console command...",
+  "status": "general"
+ },
+ "shader_cache_gen.py": {
+  "category": "one-off-patch-or-migration",
+  "deps": [
+   "ShaderCacheGen.exe from the engine install",
+   "Remote Shader Compiler running",
+   "GenerateShaderCache.cryproject in the project root",
+   "taskkill"
+  ],
+  "needs_editor": false,
+  "purpose": "Runs the manual's ShaderCacheGen step for the project: closes the editor, backs up and empties user/shaders cache, optionally seeds it from the engine's stock shadercache/shadersbin paks, copies the RSC ShaderList_PC.txt in, an...",
+  "status": "one-off"
+ },
+ "shader_cache_refresh.py": {
+  "category": "one-off-patch-or-migration",
+  "deps": [
+   "7za.exe and PakShaders.bat from the engine",
+   "Remote Shader Compiler (a local install)",
+   "taskkill, tasklist"
+  ],
+  "needs_editor": true,
+  "purpose": "Orchestrates the whole shader-cache refresh: rebuild Assets/GameShaders.pak, record shader misses via a fresh Profile package plus shader_tour.py and the Remote Shader Compiler, run shader_cache_gen.py, run PakShaders.bat into ...",
+  "status": "one-off"
+ },
+ "shader_catalog.py": {
+  "category": "catalog-or-checker",
+  "deps": [
+   "engine install engine/shaders.pak",
+   "optional engine source tree (MaterialHelpers.cpp, TextureHelpers.cpp)",
+   "project cache globals.txt"
+  ],
+  "needs_editor": false,
+  "purpose": "Builds a catalog of the engine's shaders from shaders.pak (.ext generation flags, .cfx public parameters, texture slots) plus the engine source texture tables, and resolves StringGenMask/GenMask the way the material loader does.",
+  "status": "general"
+ },
+ "shader_pixel_test.py": {
+  "category": "project-specific-ashvale",
+  "deps": [
+   "packaged Ashvale build with GameLauncher.exe",
+   "game-side bridge on 127.0.0.1:37777",
+   "taskkill"
+  ],
+  "needs_editor": false,
+  "purpose": "Boots a packaged build's GameLauncher, puts a sphere with each project test material in front of the camera through the game bridge (port 37777), captures TGAs and counts cyan/magenta pixels to prove the custom shaders really d...",
+  "status": "example / project-specific"
+ },
+ "shader_tour.py": {
+  "category": "project-specific-ashvale",
+  "deps": [
+   "packaged Ashvale build",
+   "game bridge on 127.0.0.1:37777",
+   "undercroft_kit.py, uc_shots.py, uc_stand.json",
+   "Remote Shader Compiler (with --rsc)",
+   "taskkill"
+  ],
+  "needs_editor": false,
+  "purpose": "Plays a packaged Ashvale build through a scripted route (menus, dialogues, every building, time of day, rain, cutscenes, the dungeon, the fight, saves) to collect shader-cache misses, optionally feeding the Remote Shader Compil...",
+  "status": "example / project-specific"
+ },
+ "shot_compare.py": {
+  "category": "core-tool-module",
+  "deps": [
+   "numpy",
+   "ffmpeg",
+   "ffprobe on PATH"
+  ],
+  "needs_editor": false,
+  "purpose": "Measures the difference between two game pictures (mean abs diff, changed fraction, 3x3 and 4x4 grids, luminance, local contrast), with a noise-floor control, self-comparison check, ignore boxes, and a difference picture.",
+  "status": "general"
+ },
+ "snapshot.py": {
+  "category": "core-tool-module",
+  "deps": [
+   "git on PATH (for the engine patch)"
+  ],
+  "needs_editor": false,
+  "purpose": "Content-addressed project snapshots (blob store plus manifests) with list/verify/diff/restore; optionally also the plugin source, the engine repository's git diff and a Claude memory folder.",
+  "status": "general"
+ },
+ "soundscape_test.py": {
+  "category": "test",
+  "deps": [
+   "audio_peakmeter.ps1 via powershell",
+   "packaged Ashvale build",
+   "game bridge on 37777",
+   "taskkill"
+  ],
+  "needs_editor": false,
+  "purpose": "Measures the game's audio session with the Windows output meter to verify rain, crickets, wind, music, voice, volume and scheduled one-shots follow weather/clock, each with silent controls.",
+  "status": "example / project-specific"
+ },
+ "stack_sample.py": {
+  "category": "authoring-tool",
+  "deps": [
+   "Windows (ctypes WinDLL kernel32, psapi, dbghelp)"
+  ],
+  "needs_editor": false,
+  "purpose": "Samples a live Windows process's main-thread (or all threads') call stacks without a debugger using SuspendThread, GetThreadContext, StackWalk64 and dbghelp, and prints leaf modules, frequent stacks and per-thread busy time.",
+  "status": "general"
+ },
+ "statoscope_read.py": {
+  "category": "authoring-tool",
+  "deps": [],
+  "needs_editor": false,
+  "purpose": "Parses a Statoscope perflog*.bin (the engine's per-frame profiler log) and prints per-section frame-time percentiles, GPU/main/render load, draw calls, GPU pass times, memory, longest frames and top functions, sectioned by user...",
+  "status": "general"
+ },
+ "story_check.py": {
+  "category": "project-specific-ashvale",
+  "deps": [],
+  "needs_editor": false,
+  "purpose": "Offline quest-logic solver: reads dialogue.xml, level layers and game C++ flag literals, searches over flag-set states and reports unreachable flags, dangling gotos, missing dialogues (S001-S009).",
+  "status": "example / project-specific"
+ },
+ "swatch_board.py": {
+  "category": "authoring-tool",
+  "deps": [
+   "numpy (via shot_compare)",
+   "sibling modules debug_views, shot_compare, window_capture, world_build",
+   "running Sandbox editor with ClaudeBridgePlugin"
+  ],
+  "needs_editor": true,
+  "purpose": "Creates a scratch editor level zz_mcp_swatches with a row of cube slabs each carrying a given material, shoots the editor viewport and composes 2x2 contact sheets, then reopens the previous level and deletes the scratch level.",
+  "status": "general"
+ },
+ "symbolize.py": {
+  "category": "core-tool-module",
+  "deps": [
+   "Windows dbghelp.dll (ctypes)"
+  ],
+  "needs_editor": false,
+  "purpose": "Resolves Module+0xOFFSET crash-log frames to function and source line via dbghelp (ctypes) using PDBs matched by GUID/age; can parse an engine error.log crash stack.",
+  "status": "general"
+ },
+ "terrain_gen.py": {
+  "category": "core-tool-module",
+  "deps": [
+   "numpy"
+  ],
+  "needs_editor": false,
+  "purpose": "Numpy heightmap generator (flat/hills/mountains/island styles, flat building platforms, optional droplet erosion) in the engine's [x,y] float32 layout; delegates noise/erosion to make_heightmap.py.",
+  "status": "general"
+ },
+ "test_ace_catalog.py": {
+  "category": "test",
+  "deps": [],
+  "needs_editor": false,
+  "purpose": "Tests ace_catalog.py (audio-trigger library/sample/code cross-check).",
+  "status": "general"
+ },
+ "test_anim_check.py": {
+  "category": "test",
+  "deps": [],
+  "needs_editor": true,
+  "purpose": "Tests anim_check.py. Offline: chrparams/blend-space/animevents checks on synthetic XML with positive controls (19 checks).",
+  "status": "general"
+ },
+ "test_anim_sample.py": {
+  "category": "test",
+  "deps": [
+   "running Sandbox + ClaudeBridgePlugin",
+   "motionbricks_clips.json manifest and the compiled clips in the project"
+  ],
+  "needs_editor": true,
+  "purpose": "Live test of anim_sample.py / the plugin verb bridge.character.samplepose: needs the editor with a level open.",
+  "status": "general"
+ },
+ "test_asset_catalog.py": {
+  "category": "test",
+  "deps": [],
+  "needs_editor": false,
+  "purpose": "Tests asset_catalog.py (index of .cryasset metadata, users/unused/heaviest/coverage). Part 1: throwaway temp tree with known answers. Part 2: the real project's metadata. Offline, no editor. Plain script.",
+  "status": "general"
+ },
+ "test_asset_lint.py": {
+  "category": "test",
+  "deps": [
+   "Windows msvcrt for the lock test (guarded by ImportError)",
+   "a copy of the GameSDK forest rock mesh inside the project",
+   "Ashvale's barn.cgf"
+  ],
+  "needs_editor": false,
+  "purpose": "Tests asset_lint.py: builds a large fixture Assets folder in .cache/lint_fixture with one planted instance of each lint code (L001-L018) plus clean twins, expects exactly the right codes;",
+  "status": "example / project-specific"
+ },
+ "test_asset_meta.py": {
+  "category": "test",
+  "deps": [
+   "engine Tools/rc/rc.exe (M.RC)"
+  ],
+  "needs_editor": false,
+  "purpose": "Tests asset_meta.py (generates missing .cryasset files via the engine's rc.exe) on a throwaway copy in temp dir, then does a dry run on the real project.",
+  "status": "general"
+ },
+ "test_audio_report.py": {
+  "category": "test",
+  "deps": [
+   "numpy",
+   "ffmpeg on PATH (A._tool)",
+   "ffprobe"
+  ],
+  "needs_editor": false,
+  "purpose": "Tests audio_report.py (peak/RMS/LUFS/spectrum/clipping/silence/loop-seam/stereo/voice) against synthetic WAVs with known answers written to job_runs/_audio_test (removed in finally), an ffmpeg-encoded OGG, refusal of paths outs...",
+  "status": "general"
+ },
+ "test_bt_check.py": {
+  "category": "test",
+  "deps": [
+   "engine source tree from env CRYENGINE_SOURCE (no default; the node-registry part is skipped when unset)",
+   "bridge_py/editor for the live part"
+  ],
+  "needs_editor": true,
+  "purpose": "Tests bt_check.py (behaviour-tree validator). Offline: node-registration scanner reads the ENGINE SOURCE tree, code scanner on a temp file, then the Ashvale game's code.",
+  "status": "example / project-specific"
+ },
+ "test_capture_safety.py": {
+  "category": "test",
+  "deps": [],
+  "needs_editor": false,
+  "purpose": "Static scan of every *.py of this repository: fails if any script other than window_capture.py calls CopyFromScreen/ImageGrab/BitBlt( directly (privacy safeguard against screenshotting another window), and checks four named scripts...",
+  "status": "general"
+ },
+ "test_character_check.py": {
+  "category": "test",
+  "deps": [
+   "bridge_py/editor for the live part"
+  ],
+  "needs_editor": true,
+  "purpose": "Tests character_check.py. Offline: .cdf/.chr/.skin literal scanner on a temp file, then the Ashvale game's code and project character list.",
+  "status": "example / project-specific"
+ },
+ "test_cryproject_check.py": {
+  "category": "test",
+  "deps": [
+   "CRYENGINE Launcher engine registry (P.engine_registry)",
+   "bridge_py/editor for the live part"
+  ],
+  "needs_editor": true,
+  "purpose": "Tests cryproject_check.py: mutates deep copies of the active project's own Game.cryproject (positive controls P001-P010), then, with the editor, compares against what the engine's project manager parsed.",
+  "status": "general"
+ },
+ "test_cvar_catalog.py": {
+  "category": "test",
+  "deps": [
+   "engine source tree (C.SOURCE, env CRYENGINE_SOURCE, no default; reads CryCore/Project/ProjectDefines.h)",
+   "engine_data/cvar_catalog + cvar_flags.txt + release_probe.json"
+  ],
+  "needs_editor": false,
+  "purpose": "Tests cvar_catalog.py: registration-macro parser and the C preprocessor evaluator on fixtures;",
+  "status": "general"
+ },
+ "test_debug_views.py": {
+  "category": "test",
+  "deps": [
+   "engine install's debug_views script",
+   "bridge_py/editor for live"
+  ],
+  "needs_editor": true,
+  "purpose": "Tests debug_views.py. Offline: view catalog parsed from the engine's own debug_views.py script (10 checks pass).",
+  "status": "general"
+ },
+ "test_decal_lab.py": {
+  "category": "test",
+  "deps": [
+   "GameSDK sample project pak from the Launcher assets",
+   "import_gamesdk_asset, object_props, material_check, bridge_py/editor for live"
+  ],
+  "needs_editor": true,
+  "purpose": "Tests decal_lab.py. Offline: material rules with controls, then the GameSDK sample decal catalog (D.build rebuilds engine_data/gamesdk_decals.json from the local sample pak every run).",
+  "status": "general"
+ },
+ "test_drs_check.py": {
+  "category": "test",
+  "deps": [
+   "bridge_py/editor for live"
+  ],
+  "needs_editor": true,
+  "purpose": "Tests drs_check.py (Dynamic Response System vs .response/.dialog files).",
+  "status": "general"
+ },
+ "test_editor_api.py": {
+  "category": "test",
+  "deps": [
+   "engine_data editor API dump, sweep and pane list"
+  ],
+  "needs_editor": false,
+  "purpose": "Tests editor_api.py (catalog of the Sandbox Python API) against the shipped editor_api.json dump. Offline; the sweep checks are skipped until bridge/editor_api.py --sweep has been run with the editor open. Plain script.",
+  "status": "general"
+ },
+ "test_editor_commands.py": {
+  "category": "test",
+  "deps": [
+   "engine_data/editor_commands.json and the editor API dump"
+  ],
+  "needs_editor": false,
+  "purpose": "Tests editor_commands.py against the committed engine_data/editor_commands.json (editor command manager dump) and the Python API catalog. Offline. Plain script.",
+  "status": "general"
+ },
+ "test_editor_panel.py": {
+  "category": "test",
+  "deps": [
+   "bridge_py/editor for live",
+   "Python >=3.8 on the host (ast.parse feature_version)"
+  ],
+  "needs_editor": true,
+  "purpose": "Tests editor_panel.py (the 'Claude Status' pane running in Sandbox's Python 3.7).",
+  "status": "general"
+ },
+ "test_editor_suite.py": {
+  "category": "test",
+  "deps": [
+   "bridge_py/editor for the two leak cases"
+  ],
+  "needs_editor": true,
+  "purpose": "Tests editor_suite.py (the runner that executes every test_*.py) using FAKE test scripts in a temp dir: pass, fail, timeout (20 s sleep killed at 2 s), plus with the editor a test that leaves a level object and one that leaves ...",
+  "status": "general"
+ },
+ "test_editor_ux.py": {
+  "category": "test",
+  "deps": [
+   "bridge_py/editor for live"
+  ],
+  "needs_editor": true,
+  "purpose": "Tests editor_ux.py (notify and guarded undo/redo). Offline with a fake bridge (guards, 9 checks pass);",
+  "status": "general"
+ },
+ "test_editor_window.py": {
+  "category": "test",
+  "deps": [
+   "Windows editor window handle",
+   "debug_views.shoot"
+  ],
+  "needs_editor": true,
+  "purpose": "Live test of editor_window.py (window size and 3D viewport crop box) and of debug_views.shoot cropping. Needs the visible Sandbox window; never resizes it. Plain script. Without an editor window it prints a note and exits 0.",
+  "status": "general"
+ },
+ "test_engine_tests.py": {
+  "category": "test",
+  "deps": [
+   "engine install with the seven *UnitTest.exe",
+   "Windows tasklist"
+  ],
+  "needs_editor": false,
+  "purpose": "Tests engine_tests.py: GoogleTest parser on synthetic output, whitelist/filter refusals, then actually RUNS the engine's seven *UnitTest.exe and compares against a saved baseline.",
+  "status": "general"
+ },
+ "test_entity_check.py": {
+  "category": "test",
+  "deps": [
+   "bridge_py/editor for live"
+  ],
+  "needs_editor": true,
+  "purpose": "Tests entity_check.py (level .lyr entity components vs the live engine).",
+  "status": "general"
+ },
+ "test_env_check.py": {
+  "category": "test",
+  "deps": [
+   "engine source tree from env CRYENGINE_SOURCE (no default)",
+   "bridge_py/editor for the live comparison"
+  ],
+  "needs_editor": true,
+  "purpose": "Tests env_check.py (time-of-day .env presets). Reads the engine's variable table from ENGINE SOURCE, compares with live bridge.env.list if the editor is up, checks Ashvale's presets, and writes broken copies to a temp dir.",
+  "status": "example / project-specific"
+ },
+ "test_flow_check.py": {
+  "category": "test",
+  "deps": [
+   "bridge_py/editor for live"
+  ],
+  "needs_editor": true,
+  "purpose": "Tests flow_check.py (flow graph validator). Offline: comparison on synthetic data, then reads Ashvale's libs/FlowGraphs/claude_farm.xml and the game C++ nodes.",
+  "status": "example / project-specific"
+ },
+ "test_flow_graph.py": {
+  "category": "test",
+  "deps": [],
+  "needs_editor": false,
+  "purpose": "Tests flow_graph.build (spec to standalone/in-level flow graph XML, refusal of bad specs).",
+  "status": "general"
+ },
+ "test_frame_profile.py": {
+  "category": "test",
+  "deps": [
+   "bridge_py/editor for live"
+  ],
+  "needs_editor": true,
+  "purpose": "Tests frame_profile.py (engine frame profiler XML). Offline: parser/findings/compare on synthetic profiles in a temp dir (15 checks pass).",
+  "status": "general"
+ },
+ "test_gamesdk_audio.py": {
+  "category": "test",
+  "deps": [
+   "GameSDK sample project audio.pak (Launcher assets)",
+   "ffprobe via audio_report.probe"
+  ],
+  "needs_editor": false,
+  "purpose": "Tests gamesdk_audio.py: Ogg duration reader vs ffprobe on an Ashvale file, catalog read from the GameSDK sample's audio.pak, search.",
+  "status": "example / project-specific"
+ },
+ "test_gametoken_check.py": {
+  "category": "test",
+  "deps": [],
+  "needs_editor": false,
+  "purpose": "Tests gametoken_check.py on synthetic levels in a temp dir (control plus 9 broken libraries), then the real 'ashvale' level. Offline; the part that reads the Ashvale level fails on another project. Plain script executing at import time.",
+  "status": "example / project-specific"
+ },
+ "test_health.py": {
+  "category": "test",
+  "deps": [
+   "importing server.py (FastMCP)",
+   "a built release package (jobs.BUILDS['release'])"
+  ],
+  "needs_editor": false,
+  "purpose": "Tests health.py: package_freshness against a fixture in job_runs/_health_test with a patched PROJECT/J.BUILDS (restored in finally), then the whole H.check() on the real machine, wait_for_editor with a fake clock, an...",
+  "status": "general"
+ },
+ "test_kimodo_clips.py": {
+  "category": "test",
+  "deps": [
+   "numpy",
+   "anim_sources/*.npz and soma77_skeleton.json",
+   "compiled kimodo/motionbricks .caf files in the Ashvale project"
+  ],
+  "needs_editor": false,
+  "purpose": "Tests the generated-clip pipeline (kimodo_retarget, anim_oneshot, kimodo_clips, motionbricks_actions, motionbricks_validate) with numpy against committed motion data in anim_sources/, motionbricks_clips.json and the compiled .c...",
+  "status": "example / project-specific"
+ },
+ "test_knowledge_eval.py": {
+  "category": "test",
+  "deps": [
+   "rag/cryengine_project_rag.jsonl, knowledge_holdout.json, knowledge_dev.json",
+   "optional mirror folder (corpus_lib.MIRROR, env CRYENGINE_CORPUS_MIRROR) and its rag_query.py"
+  ],
+  "needs_editor": false,
+  "purpose": "Tests the RAG knowledge base: 76 self-graded Q&A, hold-out and dev sets from JSON with recorded floors, corpus machinery (the mirror and wrapper checks run only when CRYENGINE_CORPUS_MIRROR points at a mirror folder, validat...",
+  "status": "general"
+ },
+ "test_level_check.py": {
+  "category": "test",
+  "deps": [
+   "Ashvale project (levels/ashvale, libs/environmentpresets/ashvale_clear|rain.env)"
+  ],
+  "needs_editor": true,
+  "purpose": "Self-test of level_check.py. Control + positive controls on synthetic levels in a temp dir (offline, good), then the test runs the REAL 'ashvale' level (L.check('ashvale')) and a replay of a real incident using the project'...",
+  "status": "example / project-specific"
+ },
+ "test_level_stats.py": {
+  "category": "test",
+  "deps": [
+   "editor (bridge_py)",
+   "SaveLevelStats output workbook"
+  ],
+  "needs_editor": true,
+  "purpose": "Self-test of level_stats.py: workbook reader and warning grouping on synthetic data (offline), then, if the editor answers bridge.object.list, runs the engine's SaveLevelStats and Check Level for Errors on the open...",
+  "status": "general"
+ },
+ "test_lods_live.py": {
+  "category": "test",
+  "deps": [
+   "editor (bridge_py)",
+   "numpy"
+  ],
+  "needs_editor": true,
+  "purpose": "Live test in the EDITOR of build_mesh LODs: builds two meshes into Assets/objects/_mcp_detailtest, places scratch brushes in the open level, takes viewport screenshots with e_LodMin 0/1 and compares pixel changes.",
+  "status": "general"
+ },
+ "test_mannequin_check.py": {
+  "category": "test",
+  "deps": [
+   "editor (bridge_py)",
+   "Ashvale Code/ C++ sources",
+   "Ashvale Villager.adb, VillagerControllerDefinition.xml, character with >1000 animations"
+  ],
+  "needs_editor": true,
+  "purpose": "Self-test of mannequin_check.py. Offline comparison-logic checks, but it also reads the game's C++ and assert Ashvale fragment names.",
+  "status": "example / project-specific"
+ },
+ "test_manual.py": {
+  "category": "test",
+  "deps": [
+   "offline manual markdown folder (manual.DOCS = CRYENGINE_DOCS env or docs_search.DEFAULT_DOCS)"
+  ],
+  "needs_editor": false,
+  "purpose": "Offline self-test of manual.py (search/read/toc over the offline CRYENGINE manual markdown folder). Reads only; plain script, exit code, ~3 s.",
+  "status": "general"
+ },
+ "test_material_check.py": {
+  "category": "test",
+  "deps": [
+   "editor (bridge_py) incl. bridge.material.check",
+   "Ashvale materials: world.mtl (11 sub-materials, [7]=dirtroad), cloth.mtl, people/bandit.mtl, head_a"
+  ],
+  "needs_editor": true,
+  "purpose": "Self-test of material_check.py: synthetic engine rows compared offline, but it reads the real materials/ashvale/world.mtl unconditionally.",
+  "status": "example / project-specific"
+ },
+ "test_materialfx.py": {
+  "category": "test",
+  "deps": [
+   "Ashvale libs/materialeffects/fxlibs/ashvale_impact.xml and the materialeffects sheet",
+   "claude_sfx.xml audio trigger definitions"
+  ],
+  "needs_editor": false,
+  "purpose": "Offline self-test of materialfx.py: reads the project's materialeffects.xml and ashvale_impact.xml, builds broken copies in a temp folder and expects each M00x rule to fire. No editor. Plain script returning 0/1.",
+  "status": "example / project-specific"
+ },
+ "test_mcp_tools.py": {
+  "category": "test",
+  "deps": [
+   "mcp python package (ClientSession, stdio_client)",
+   "Piper TTS (preview_voice)",
+   "rc.exe/engine textures pipeline",
+   "Sandbox editor (partial)",
+   "Ashvale assets"
+  ],
+  "needs_editor": true,
+  "purpose": "Protocol-level end-to-end test: launches server.py over stdio with the mcp client, lists all 154 tools, calls lint, jobs (selftest job, refusals), pipeline (make_texture/write_material/build_mesh/preview_voice), tool_guide, health...",
+  "status": "example / project-specific"
+ },
+ "test_nav_check.py": {
+  "category": "test",
+  "deps": [
+   "editor (bridge_py)",
+   "Ashvale level with navmesh AshvaleNav"
+  ],
+  "needs_editor": true,
+  "purpose": "Live test of nav_check.py on the open Ashvale level: agent type, reachability between named objects, a map of the Reeve house area. Exits 0 with 'nothing to test' if the editor is not open. Plain script.",
+  "status": "example / project-specific"
+ },
+ "test_object_catalog.py": {
+  "category": "test",
+  "deps": [
+   "engine_data/object_catalog.json"
+  ],
+  "needs_editor": false,
+  "purpose": "Offline self-test of object_catalog.py against engine_data/object_catalog.json (captured from the editor): 36 object types, defaults of Road/River/VisArea/WaterVolume, search. Plain script.",
+  "status": "general"
+ },
+ "test_object_check.py": {
+  "category": "test",
+  "deps": [
+   "object_check, open_level, object_props",
+   "Ashvale levels ashvale and ashvale_undercroft"
+  ],
+  "needs_editor": true,
+  "purpose": "Self-test of object_check.py: synthetic comparisons offline (good), a temp layer dir, then reads the real ashvale_undercroft layers, then if the editor answers, compares the real 'ashvale' brushes against the live ed...",
+  "status": "example / project-specific"
+ },
+ "test_object_props.py": {
+  "category": "test",
+  "deps": [
+   "editor (bridge_py) for live half"
+  ],
+  "needs_editor": true,
+  "purpose": "Self-test of object_props.py: spline/Bezier maths and key validation offline;",
+  "status": "general"
+ },
+ "test_objects.py": {
+  "category": "test",
+  "deps": [
+   "editor (bridge_py)"
+  ],
+  "needs_editor": true,
+  "purpose": "Live test of objects.py (place/delete tool with dry-run, name safety) against the open editor: creates Mcptest_* brushes, checks refusals, dry-runs a delete on the real Chapel_ objects, removes its own, asserts the object count...",
+  "status": "general"
+ },
+ "test_pak_textures.py": {
+  "category": "test",
+  "deps": [
+   "engine Tools/7za.exe (pak_textures.SEVENZA, derived from ENGINE)"
+  ],
+  "needs_editor": false,
+  "purpose": "Offline self-test of pak_textures.py: creates a throwaway Assets tree in a temp folder, adds split texture files to a zip using the engine's 7za.exe, checks entries/contents/refusals.",
+  "status": "general"
+ },
+ "test_particle_catalog.py": {
+  "category": "test",
+  "deps": [
+   "editor (bridge_py) for live half",
+   "GameSDK sample effects (sample:Particles/examples/...)"
+  ],
+  "needs_editor": true,
+  "purpose": "Self-test of particle_catalog.py: catalog from engine_data (offline), diff logic on synthetic effects, then with the editor round-trips real effects (GameSDK snow.pfx, project dust.pfx, fireworks.pfx) through the engine loader;",
+  "status": "general"
+ },
+ "test_pbs_check.py": {
+  "category": "test",
+  "deps": [],
+  "needs_editor": false,
+  "purpose": "Self-test of pbs_check.py: PBS rules on synthetic materials with positive controls (portable), then on the active project's own materials (that second part reflects the project's data and can fail on another project). Plain script.",
+  "status": "general"
+ },
+ "test_pfx_author.py": {
+  "category": "test",
+  "deps": [
+   "editor (bridge_py)",
+   "engine/GameSDK texture textures/sprites/glow/glow_a.dds"
+  ],
+  "needs_editor": true,
+  "purpose": "Self-test of pfx_author.py: compose/validation of particle effects offline (portable), then with the editor writes effects to Assets/Particles/zz_test_<time>/, loads through the engine, spawns a scratch entity at a fixed Ashval...",
+  "status": "general"
+ },
+ "test_pipeline.py": {
+  "category": "test",
+  "deps": [
+   "engine rc.exe (texture compile)",
+   "asset_lint, pipeline",
+   "numpy/Pillow presumably via pipeline (not verified)"
+  ],
+  "needs_editor": false,
+  "purpose": "End-to-end test of pipeline.py: make_texture (RC-compiled DDS), write_material, build_mesh (including LODs) and the asset linter, with refusals.",
+  "status": "general"
+ },
+ "test_project_audit.py": {
+  "category": "test",
+  "deps": [
+   "editor for the full run"
+  ],
+  "needs_editor": true,
+  "purpose": "Self-test of project_audit.py: baseline comparison and failure isolation on synthetic validators (portable, writes a temp baseline), then an editor-free run over the real project and, if the editor is open, a full run.",
+  "status": "general"
+ },
+ "test_prune_imports.py": {
+  "category": "test",
+  "deps": [],
+  "needs_editor": false,
+  "purpose": "Offline self-test of prune_imports.py and a text check of import_gamesdk_asset.py: builds a fake Assets tree in a temp dir and checks which files are deletion candidates. Plain script.",
+  "status": "general"
+ },
+ "test_rc_catalog.py": {
+  "category": "test",
+  "deps": [
+   "engine rc.exe and rc.ini (R.RC_EXE)"
+  ],
+  "needs_editor": false,
+  "purpose": "Self-test of rc_catalog.py: rc.ini and help parsers on synthetic text, then the real engine rc.ini and a real 'rc.exe /help' subprocess (read-only).",
+  "status": "general"
+ },
+ "test_render_tour.py": {
+  "category": "test",
+  "deps": [],
+  "needs_editor": true,
+  "purpose": "Tests render_tour.py. Offline part: setting parser, default tour variables exist in the engine CVar catalog and are editor-settable, label text.",
+  "status": "general"
+ },
+ "test_schematyc_catalog.py": {
+  "category": "test",
+  "deps": [
+   "engine_data/schematyc_env.json",
+   "engine source checkout at CRYENGINE_SOURCE"
+  ],
+  "needs_editor": false,
+  "purpose": "Tests schematyc_catalog.py against the registry dump engine_data/schematyc_env.json (header consistency, unique GUIDs, component/function search, strict UTF-8).",
+  "status": "general"
+ },
+ "test_sequence_check.py": {
+  "category": "test",
+  "deps": [
+   "Assets/libs/ashvale/sequences/ashvale_intro.xml"
+  ],
+  "needs_editor": true,
+  "purpose": "Tests sequence_check.py. Offline: value comparison, document diff, late-key detection on synthetic XML.",
+  "status": "example / project-specific"
+ },
+ "test_server_support.py": {
+  "category": "test",
+  "deps": [
+   "mcp (FastMCP) python package",
+   "engine_data catalogs cvars.json/editor_commands.json/editor_api.json generated from a real editor"
+  ],
+  "needs_editor": false,
+  "purpose": "Tests server_support.py (bounded output, paging, danger deny-list, load_level/export logic with a FakeIO, recovery marker), catalog_stamps.py and server.py wiring (imports server, real FastMCP tool calls, local fake bridge socket).",
+  "status": "general"
+ },
+ "test_shader_catalog.py": {
+  "category": "test",
+  "deps": [
+   "installed CRYENGINE 5.7.1 shaders.pak / globals.txt (located by S.find_globals)",
+   "engine source for texture-slot tables"
+  ],
+  "needs_editor": false,
+  "purpose": "Tests shader_catalog.py against the engine's own files (engine shaders.pak, globals.txt, source texture-slot tables) and, as a control, the project's .mtl materials.",
+  "status": "general"
+ },
+ "test_shot_compare.py": {
+  "category": "test",
+  "deps": [
+   "numpy"
+  ],
+  "needs_editor": false,
+  "purpose": "Tests shot_compare.py on synthetic numpy pictures with known differences (noise floor, ignore boxes, local contrast, difference picture, refusals);",
+  "status": "general"
+ },
+ "test_snapshot.py": {
+  "category": "test",
+  "deps": [
+   "msvcrt (Windows, optional)"
+  ],
+  "needs_editor": false,
+  "purpose": "Tests snapshot.py on a throw-away fixture project in job_runs/_snap_test: include/exclude rules, dedup, diff, restore (side folder, in place with undo), refusals, verify/corruption, interrupted snapshot, locked file ...",
+  "status": "general"
+ },
+ "test_tool_smoke.py": {
+  "category": "test",
+  "deps": [
+   "running Sandbox with ClaudeBridgePlugin (or the watchdog scheduled task)",
+   "mcp python package, asyncio"
+  ],
+  "needs_editor": true,
+  "purpose": "Regression test for tool_smoke.py: starts the real MCP server over stdio and calls ~90 read-only tools once, plus invalid-argument calls on mutating tools, checks that every tool is classified and output stays within budget.",
+  "status": "general"
+ },
+ "test_ui_check.py": {
+  "category": "test",
+  "deps": [
+   "the project's Assets/libs/ui with a MainMenu element"
+  ],
+  "needs_editor": true,
+  "purpose": "Tests ui_check.py. Offline: synthetic UI folders (tempfile zz_mcp_ui_*) with clean controls and many positive controls (U001-U013), synthetic engine records.",
+  "status": "general"
+ },
+ "test_uqs_check.py": {
+  "category": "test",
+  "deps": [
+   "Ashvale libs/ai/uqs/BestSpotToStand.uqs and its C++ caller"
+  ],
+  "needs_editor": true,
+  "purpose": "Tests uqs_check.py. Offline: code scanner on a temp source file.",
+  "status": "example / project-specific"
+ },
+ "test_visarea_check.py": {
+  "category": "test",
+  "deps": [],
+  "needs_editor": true,
+  "purpose": "Tests visarea_check.py. Offline: engine naming rule, layer-file/exported-pack checks on synthetic levels in a temp dir, engine comparison on synthetic records, then the project's own 'ashvale' level (files only).",
+  "status": "example / project-specific"
+ },
+ "test_visual_check.py": {
+  "category": "test",
+  "deps": [
+   "numpy",
+   "visual_check.py, jobs.py, shot_compare.py"
+  ],
+  "needs_editor": false,
+  "purpose": "Offline test of visual_check.py's decision logic on synthetic numpy pictures (changed/same/noisy/missing verdicts, accept, shot-list structure, job argv, job_status verdict parsing).",
+  "status": "general"
+ },
+ "test_watchdog_crash.py": {
+  "category": "test",
+  "deps": [],
+  "needs_editor": false,
+  "purpose": "Tests bridge_watchdog.crash_report_after with temp error.log files and mtimes, W.sandbox_started() against the real process list, and a source-text ordering check.",
+  "status": "general"
+ },
+ "test_watchdog_recover.py": {
+  "category": "test",
+  "deps": [
+   "bridge_watchdog.py, bridge_py.py"
+  ],
+  "needs_editor": false,
+  "purpose": "Tests bridge_watchdog.recover, the run lock and bridge_py.send's retry using a fake clock and replaced launch/kill/task functions;",
+  "status": "general"
+ },
+ "test_world_build.py": {
+  "category": "test",
+  "deps": [
+   "numpy",
+   "engine asset %ENGINE%/EngineAssets/Objects/primitive_cylinder.cgf"
+  ],
+  "needs_editor": true,
+  "purpose": "Tests terrain_gen.py offline (numpy: styles, determinism, layout, zones, erosion, refusals) and world_build.py live: creates scratch level zz_mcp_wb_level in the active project's Assets/levels, reshapes terrain, bakes twice, paints veget...",
+  "status": "general"
+ },
+ "texture_lab.py": {
+  "category": "core-tool-module",
+  "deps": [
+   "numpy",
+   "rc.exe from the CRYENGINE install"
+  ],
+  "needs_editor": false,
+  "purpose": "Procedural tileable surface textures (plaster, timber, thatch, stone, slate, planks, bark, cobble, dirtroad, cloth) built with numpy FFT noise, written as CryTIF TIFFs and compiled to .dds by the engine's rc.exe;",
+  "status": "general"
+ },
+ "texture_lab_crypt.py": {
+  "category": "project-specific-ashvale",
+  "deps": [
+   "numpy",
+   "rc.exe via texture_lab.RC"
+  ],
+  "needs_editor": false,
+  "purpose": "Nine more procedural texture recipes (ashlar, brick, flagstone, rockface, cavefloor, mossy, bones, marble, ironplate) that register themselves into texture_lab's SURFACES/TILE_METRES/bump tables; CLI to make and compile them.",
+  "status": "example / project-specific"
+ },
+ "texture_preview.py": {
+  "category": "authoring-tool",
+  "deps": [
+   "numpy"
+  ],
+  "needs_editor": false,
+  "purpose": "Decodes the BC1 diffuse and BC4 gloss mips from a material's compiled .dds files (no renderer), prints average colour, contrast, shininess and resulting smoothness, and writes PNG contact sheets of 20 materials.",
+  "status": "general"
+ },
+ "tga2png.py": {
+  "category": "core-tool-module",
+  "deps": [],
+  "needs_editor": false,
+  "purpose": "Stdlib-only converter of uncompressed 24/32-bit TGA to PNG with optional integer downscale.",
+  "status": "general"
+ },
+ "tool_smoke.py": {
+  "category": "test",
+  "deps": [
+   "mcp python package (ClientSession, stdio_client)",
+   "a running editor for the editor tools"
+  ],
+  "needs_editor": true,
+  "purpose": "MCP client that starts server.py over stdio, lists every tool and calls each read-only one once (plus negative invalid-argument calls for mutating tools), classifying ok/expected/BROKEN/skipped/UNCLASSIFIED and enforcing an out...",
+  "status": "general"
+ },
+ "transition_frames.py": {
+  "category": "project-specific-ashvale",
+  "deps": [
+   "packaged Ashvale build with GameLauncher.exe",
+   "uc_stand.json (generated by uc_standpoints.py)",
+   "Windows (taskkill, ctypes capture)"
+  ],
+  "needs_editor": false,
+  "purpose": "Launches the packaged game, goes down and up a hatch, bursts window captures through the level transition, classifies each frame black/loader/scene and correlates with the game's trace log; optional 20-viewpoint tour.",
+  "status": "example / project-specific"
+ },
+ "uc_geom.py": {
+  "category": "project-specific-ashvale",
+  "deps": [
+   "numpy",
+   "pipeline._ear_clip"
+  ],
+  "needs_editor": false,
+  "purpose": "Geometry helpers for undercroft_kit: Parts collector (box/cylinder/frustum/bar/quad/poly), polygon-ring walls with doorways, and axis-aligned proxy generation for the offline walkability check.",
+  "status": "example / project-specific"
+ },
+ "uc_shots.py": {
+  "category": "project-specific-ashvale",
+  "deps": [
+   "numpy"
+  ],
+  "needs_editor": true,
+  "purpose": "Takes editor-viewport pictures of 20 named Undercroft viewpoints (local metres plus undercroft_kit.O), prints luminance stats and builds 2x2 contact sheets.",
+  "status": "example / project-specific"
+ },
+ "ui_check.py": {
+  "category": "catalog-or-checker",
+  "deps": [
+   "running editor with ClaudeBridgePlugin for engine comparison"
+  ],
+  "needs_editor": false,
+  "purpose": "Compares the project's FlashUI UIElement XML files with what the running engine kept (bridge.ui.dump), the loaded movie's IsAvailable answers, and the C++ Call()/SameName()/GetUIElement() sites; findings U001-U013.",
+  "status": "general"
+ },
+ "ui_menu_test.py": {
+  "category": "project-specific-ashvale",
+  "deps": [
+   "packaged Ashvale build",
+   "Windows"
+  ],
+  "needs_editor": false,
+  "purpose": "Plays the packaged game's FlashUI menus with real mouse clicks and key presses (main menu, settings, pause, map, inventory, save/load, journal) and checks the game's trace log.",
+  "status": "example / project-specific"
+ },
+ "ui_screens.py": {
+  "category": "project-specific-ashvale",
+  "deps": [
+   "packaged Ashvale build",
+   "Windows (ctypes user32/gdi32)"
+  ],
+  "needs_editor": false,
+  "purpose": "Launches the packaged game and PrintWindow-captures each UI state (intro card, HUD, dialogue, death, ending), checking text-pixel fraction and music state from the trace.",
+  "status": "example / project-specific"
+ },
+ "undercroft_kit.py": {
+  "category": "project-specific-ashvale",
+  "deps": [
+   "numpy (via uc_geom)",
+   "rc.exe via pipeline"
+  ],
+  "needs_editor": false,
+  "purpose": "The Ashvale Undercroft dungeon as data: geometry (rooms, cave, ossuary, vault), NPC/chest/pickup/torch entities, material list mapped to GameSDK materials, mesh specs for pipeline.build_mesh, and an offline reachability/enclosu...",
+  "status": "example / project-specific"
+ },
+ "undercroft_playthrough.py": {
+  "category": "project-specific-ashvale",
+  "deps": [
+   "packaged Ashvale build with GameLauncher.exe and ash_* console commands",
+   "powershell (Get-WinEvent)",
+   "taskkill",
+   "uc_stand.json (made by uc_standpoints.py)",
+   "Windows (ctypes, creationflags)"
+  ],
+  "needs_editor": false,
+  "purpose": "Top-level script (runs at import) that boots a packaged Ashvale build, plays chapter II (hatch, Undercroft, fight, vault, save/load, ending) through the game's own ash_* commands on the game bridge (port 37777), reads the game ...",
+  "status": "example / project-specific"
+ },
+ "uqs_check.py": {
+  "category": "catalog-or-checker",
+  "deps": [],
+  "needs_editor": true,
+  "purpose": "Dumps the engine's registered UQS (Universal Query System) catalog via bridge.uqs.catalog, and validates a .uqs query file through the engine's own editor service (bridge.uqs.check), then cross-checks query names and runtime pa...",
+  "status": "general"
+ },
+ "view_shots.py": {
+  "category": "project-specific-ashvale",
+  "deps": [
+   "packaged Ashvale GameLauncher with -claude_test and ash_*/claude_tod commands",
+   "taskkill",
+   "Windows"
+  ],
+  "needs_editor": false,
+  "purpose": "Launches the packaged game, starts a new game, and takes window pictures from listed positions (x y yaw, house:<Name>:<side>:<m>, ! console commands, ? verified cvar sets); used by the shoot and visual jobs.",
+  "status": "example / project-specific"
+ },
+ "villager_anim.py": {
+  "category": "project-specific-ashvale",
+  "deps": [
+   "anim_check.names() (bridge.character.names, needs running Sandbox)",
+   "motionbricks_clips.json manifest",
+   "clips compiled by motionbricks_clip.py / kimodo_clips.py (NVIDIA MotionBricks and Kimodo, local installs)"
+  ],
+  "needs_editor": true,
+  "purpose": "One table that generates the villagers' Mannequin files (Villager.adb, VillagerFragmentIds.xml, VillagerControllerDefinition.xml) and the C++ header Code/Components/VillagerAnimTable.h, with a checker that validates every clip ...",
+  "status": "example / project-specific"
+ },
+ "visarea_check.py": {
+  "category": "catalog-or-checker",
+  "deps": [],
+  "needs_editor": false,
+  "purpose": "Checks VisArea/Portal/OccluderArea objects: reads the level's .lyr layer files, the exported level.pak terrain/indoor.dat header counts and (optionally) the live 3D engine via bridge.visarea.dump;",
+  "status": "general"
+ },
+ "visual_check.py": {
+  "category": "project-specific-ashvale",
+  "deps": [
+   "packaged game with ash_brightness / claude_tod commands",
+   "visual_baseline/*.png (created by visual_check(accept=true); not shipped)"
+  ],
+  "needs_editor": false,
+  "purpose": "Visual regression harness for the packaged game: captures 14 day and 6 night views twice via view_shots.py with deterministic render settings, compares each against accepted baseline pictures using shot_compare with the repeat ...",
+  "status": "example / project-specific"
+ },
+ "voice_quality.py": {
+  "category": "core-tool-module",
+  "deps": [
+   "numpy",
+   "ffmpeg on PATH (only for .ogg)"
+  ],
+  "needs_editor": false,
+  "purpose": "Measures how periodic/voiced a speech WAV (or ogg via ffmpeg) is with frame autocorrelation: median periodicity, voiced fraction, median f0; used to detect damage from pitch/time processing.",
+  "status": "general"
+ },
+ "weapon_kit.py": {
+  "category": "project-specific-ashvale",
+  "deps": [],
+  "needs_editor": false,
+  "purpose": "Models an arrow and a bow in Python (mesh_fbx.Mesh), builds Arrow.cgf and Bow.cgf through RC and writes Assets/Materials/ashvale/weapons.mtl with flat-colour Illum materials.",
+  "status": "example / project-specific"
+ },
+ "window_capture.py": {
+  "category": "bridge-infrastructure",
+  "deps": [
+   "Windows (user32/gdi32 via ctypes)"
+  ],
+  "needs_editor": false,
+  "purpose": "Windows ctypes helpers: find a process's window, capture it via PrintWindow or guarded screen BitBlt (refusing unless the game owns the centre and corners), write PNG, measure text fraction, raise a window and do a guarded real...",
+  "status": "general"
+ },
+ "world_build.py": {
+  "category": "core-tool-module",
+  "deps": [
+   "numpy",
+   "engine install and GameSDK sample assets (for mesh lookup)"
+  ],
+  "needs_editor": true,
+  "purpose": "World-building functions behind the new_level, terrain_shape, terrain_height, terrain_layers, vegetation and save_level tools: create/open/save/delete-scratch levels, heightmap read/backup/restore/generate, terrain holes, layer...",
+  "status": "general"
+ },
+ "xml_outline.py": {
+  "category": "authoring-tool",
+  "deps": [],
+  "needs_editor": false,
+  "purpose": "Prints a compact outline (tag paths with counts and first-occurrence attributes, or name attributes) of an XML file loose in an asset directory or inside a CryPak archive, singly or by regex.",
+  "status": "general"
+ }
+}

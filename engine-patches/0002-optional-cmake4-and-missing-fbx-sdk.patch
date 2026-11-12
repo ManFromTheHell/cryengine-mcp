@@ -1,0 +1,107 @@
+diff --git a/Code/Sandbox/EditorQt/CMakeLists.txt b/Code/Sandbox/EditorQt/CMakeLists.txt
+index 050e0bea..9f4a8069 100644
+--- a/Code/Sandbox/EditorQt/CMakeLists.txt
++++ b/Code/Sandbox/EditorQt/CMakeLists.txt
+@@ -1525,7 +1525,16 @@ PRIVATE
+ )
+ target_link_libraries(${THIS_PROJECT} PRIVATE tiff zlib prt Python)
+ if(WINDOWS)
+-	target_link_libraries(${THIS_PROJECT} PRIVATE FbxSdk)
++	# The Autodesk FBX SDK is proprietary and not redistributed with the
++	# CRYENGINE SDKs -- see Tools/CMake/modules/FbxSdk.cmake. Without it
++	# installed, the FbxSdk imported target has no IMPORTED_LOCATION/IMPLIB
++	# for this configuration, and CMake emits a bogus "FbxSdk-NOTFOUND.obj"
++	# link input (LNK1104) if we link against it unconditionally. Guard it
++	# the same way FbxSdk.cmake already guards the include dirs, so a build
++	# without the real SDK still links -- just without FBX import support.
++	if(EXISTS "${SDK_DIR}/FbxSdk/include")
++		target_link_libraries(${THIS_PROJECT} PRIVATE FbxSdk)
++	endif()
+ 	target_link_libraries(${THIS_PROJECT} PRIVATE qtmain$<$<CONFIG:Debug>:d>)
+ endif()
+ 
+diff --git a/Tools/CMake/InitialSetup.cmake b/Tools/CMake/InitialSetup.cmake
+index 4b352ea6..0982f53c 100644
+--- a/Tools/CMake/InitialSetup.cmake
++++ b/Tools/CMake/InitialSetup.cmake
+@@ -6,7 +6,12 @@ endif()
+ 
+ # The target in the TARGET signature of add_custom_command() must exist and must be defined in the current directory.
+ # This is a workaround for the add_custom_command for gmock breaking with Ninja build for certain platforms.
+-cmake_policy(SET CMP0040 OLD)
++# CMP0040 OLD was removed in modern CMake (4.x) -- setting it unconditionally
++# is a hard error there ("Policy CMP0040 is not known"). Guarded the same
++# way this was fixed in the Launcher SDK's copy of this file.
++if(POLICY CMP0040)
++	cmake_policy(SET CMP0040 NEW)
++endif()
+ 
+ set_property(GLOBAL PROPERTY DEBUG_CONFIGURATIONS Debug Profile)
+ 
+diff --git a/Tools/CMake/modules/FbxSdk.cmake b/Tools/CMake/modules/FbxSdk.cmake
+index cdb5ac19..24f78167 100644
+--- a/Tools/CMake/modules/FbxSdk.cmake
++++ b/Tools/CMake/modules/FbxSdk.cmake
+@@ -1,6 +1,26 @@
+ if(WINDOWS)
+ 	add_library(FbxSdk SHARED IMPORTED GLOBAL)
+-	set_target_properties(FbxSdk PROPERTIES INTERFACE_INCLUDE_DIRECTORIES "${SDK_DIR}/FbxSdk/include")
++
++	# The Autodesk FBX SDK is proprietary and Crytek doesn't (can't, license-
++	# wise) redistribute it in the public CRYENGINE SDKs zip that
++	# DownloadSDKs.cmake fetches -- confirmed empirically: Code/SDKs has no
++	# FbxSdk folder at all after that download. Unconditionally pointing
++	# INTERFACE_INCLUDE_DIRECTORIES at a path that doesn't exist is what
++	# actually broke the CMake *generate* step (modern CMake validates an
++	# IMPORTED target's include dirs at generate time; older CMake only
++	# noticed when something actually tried to use them). Guarding it here
++	# unblocks configure/generate for everything that doesn't really need
++	# FBX import; EditorQt (Sandbox.exe itself), FbxPlugin and MeshImporter
++	# all `target_link_libraries(... FbxSdk)` unconditionally though, so
++	# they will very likely still fail at LINK time (unresolved externals)
++	# until the real SDK is installed to ${SDK_DIR}/FbxSdk -- that's a
++	# separate, genuine missing-dependency problem this guard doesn't (and
++	# can't) solve, just no longer masked by an unrelated generate-time error.
++	if(EXISTS "${SDK_DIR}/FbxSdk/include")
++		set_target_properties(FbxSdk PROPERTIES INTERFACE_INCLUDE_DIRECTORIES "${SDK_DIR}/FbxSdk/include")
++	else()
++		message(WARNING "FbxSdk not found at ${SDK_DIR}/FbxSdk -- FBX import support will not build/link correctly (EditorQt, FbxPlugin, MeshImporter). Download the Autodesk FBX SDK (free registration) and install it to that path to fix.")
++	endif()
+ 	set_target_properties(FbxSdk PROPERTIES INTERFACE_COMPILE_DEFINITIONS FBXSDK_NEW_API=1)
+ 
+ 	if (MSVC_VERSION GREATER 1900) # Visual Studio > 2015
+@@ -13,18 +33,22 @@ if(WINDOWS)
+ 		set(FBX_SUBFOLDER vs2012)
+ 	endif()
+ 
+-	set_property(TARGET FbxSdk APPEND PROPERTY IMPORTED_CONFIGURATIONS DEBUG)
+-	set_target_properties(FbxSdk PROPERTIES
+-		IMPORTED_LOCATION_DEBUG "${SDK_DIR}/FbxSdk/lib/${FBX_SUBFOLDER}/x64/debug/libfbxsdk.dll"
+-		IMPORTED_IMPLIB_DEBUG "${SDK_DIR}/FbxSdk/lib/${FBX_SUBFOLDER}/x64/debug/libfbxsdk-md.lib")
++	if(EXISTS "${SDK_DIR}/FbxSdk/lib/${FBX_SUBFOLDER}/x64/debug/libfbxsdk.dll")
++		set_property(TARGET FbxSdk APPEND PROPERTY IMPORTED_CONFIGURATIONS DEBUG)
++		set_target_properties(FbxSdk PROPERTIES
++			IMPORTED_LOCATION_DEBUG "${SDK_DIR}/FbxSdk/lib/${FBX_SUBFOLDER}/x64/debug/libfbxsdk.dll"
++			IMPORTED_IMPLIB_DEBUG "${SDK_DIR}/FbxSdk/lib/${FBX_SUBFOLDER}/x64/debug/libfbxsdk-md.lib")
++	endif()
+ 
+-	set_property(TARGET FbxSdk APPEND PROPERTY IMPORTED_CONFIGURATIONS PROFILE)
+-	set_target_properties(FbxSdk PROPERTIES
+-		IMPORTED_LOCATION_PROFILE "${SDK_DIR}/FbxSdk/lib/${FBX_SUBFOLDER}/x64/release/libfbxsdk.dll"
+-		IMPORTED_IMPLIB_PROFILE "${SDK_DIR}/FbxSdk/lib/${FBX_SUBFOLDER}/x64/release/libfbxsdk-md.lib")
++	if(EXISTS "${SDK_DIR}/FbxSdk/lib/${FBX_SUBFOLDER}/x64/release/libfbxsdk.dll")
++		set_property(TARGET FbxSdk APPEND PROPERTY IMPORTED_CONFIGURATIONS PROFILE)
++		set_target_properties(FbxSdk PROPERTIES
++			IMPORTED_LOCATION_PROFILE "${SDK_DIR}/FbxSdk/lib/${FBX_SUBFOLDER}/x64/release/libfbxsdk.dll"
++			IMPORTED_IMPLIB_PROFILE "${SDK_DIR}/FbxSdk/lib/${FBX_SUBFOLDER}/x64/release/libfbxsdk-md.lib")
+ 
+-	set_property(TARGET FbxSdk APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
+-	set_target_properties(FbxSdk PROPERTIES
+-		IMPORTED_LOCATION_RELEASE "${SDK_DIR}/FbxSdk/lib/${FBX_SUBFOLDER}/x64/release/libfbxsdk.dll"
+-		IMPORTED_IMPLIB_RELEASE "${SDK_DIR}/FbxSdk/lib/${FBX_SUBFOLDER}/x64/release/libfbxsdk-md.lib")
++		set_property(TARGET FbxSdk APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
++		set_target_properties(FbxSdk PROPERTIES
++			IMPORTED_LOCATION_RELEASE "${SDK_DIR}/FbxSdk/lib/${FBX_SUBFOLDER}/x64/release/libfbxsdk.dll"
++			IMPORTED_IMPLIB_RELEASE "${SDK_DIR}/FbxSdk/lib/${FBX_SUBFOLDER}/x64/release/libfbxsdk-md.lib")
++	endif()
+ endif()
